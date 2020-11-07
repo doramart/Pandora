@@ -1,0 +1,12 @@
+<!--文章推荐模块-->
+{% recommend key="reCommendList",pageSize=10 %}
+{% if reCommendList.length > 0 %}
+<div class="news_kx">
+    <h2>7x24小时头条</h2>
+    <ul>
+    {% for item in reCommendList %}
+      <li><i></i><a href="{{item.url}}" target="_blank">{{item.title}}</a><span>{{item.createdAt}}</span></li>
+    {% endfor %}
+    </ul>
+  </div>
+{% endif%}

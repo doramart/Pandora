@@ -1,0 +1,53 @@
+{% import "./adsPannel.html" as adsPannel %}
+<div class="links">
+  <ul class="box">
+    <p>友情链接</p>
+    {% ads name="frendlink" %}
+    {{adsPannel.slider(frendlink)}}
+  </ul>
+</div>
+<footer>
+  <div class="box">
+    <div class="ft_nav">
+      <div class="ft_about">
+        <p>关于我们</p>
+        <ul>
+          <li><a href="/t/service">关于我们</a></li>
+          <li><a href="/t/service">联系我们</a></li>
+          <li><a href="/t/service">加入我们</a></li>
+          <li><a href="/t/service">隐私条款</a></li>
+          <li><a href="/t/service">用户协议</a></li>
+          <li><a href="/t/service">免责声明</a></li>
+        </ul>
+      </div>
+      <div class="ft_contact">
+        <ul>
+          <li>时间：早7：00~晚9：00</li>
+          <li>地址：深圳市福田区深蓝大道天地一号</li>
+          <li>电话：1522888899999</li>
+          <li>邮箱：<a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=doramart@qq.com"
+              target="_blank">doramart@qq.com</a></li>
+        </ul>
+      </div>
+      <div class="ft_guanzhu">
+        <ul>
+          <li><img src="{{staticThemePath}}/picture/wx.png" alt="微信客服：476847113">微信客服</li>
+          <li><img src="{{staticThemePath}}/picture/wxgzh.jpg" alt="微信公众号">微信公众号</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="cr_left">
+        <p>系统基于 DoraCMS-SQL {{site.version}} </p>
+        <p>© Copyright Shenzhen doracms Technology Co., Ltd </p>
+      </div>
+      <div class="cr_right">
+        <p>备案号：<a href="http://www.beian.miit.gov.cn/" rel="nofollow" target="_blank">
+            {{site.configs.registrationNo}}
+          </a></p>
+        <p><a href="/sitemap.html" target="_blank">网站地图</a><a href="/tags" target="_blank">标签合集</a><a href="/"
+            target="_blank">网站统计</a></p>
+      </div>
+    </div>
+  </div>
+</footer>

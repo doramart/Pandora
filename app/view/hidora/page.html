@@ -1,0 +1,33 @@
+{% extends "./default.html" %}
+{% block content %}
+
+<main>
+  <div class="weizhi">您现在的位置是：<a href="/">首页</a>&nbsp;>&nbsp;
+    {% if pageType != 'search' and pageType != 'tag' %}
+    <a href="{{cateInfo.url}}">{{list_title}}</a>
+    {% else %}
+    {{list_title}}
+    {% endif %}
+  </div>
+  <div class="lbox">
+    {% if pageType != 'search' and pageType != 'tag' %}
+    <div class="zhuanti"> <a href="javascript:;"> <span>分类</span><img
+          src="{{staticThemePath}}/picture/a5770eeddc893fcd0bc56dd615b2a1b1.png" alt="三维模型师的职业前景是怎样的？">
+        <section>
+          <h2>{{cateInfo.name}}</h2>
+          <p>{{cateInfo.comments}}</p>
+        </section>
+      </a> </div>
+    {% endif %}
+    <div class="blogs">
+      {% include "./public/itemListTemp.html" %}
+
+    </div>
+  </div>
+  <aside class="rbox">
+    <!-- <div class="ad"><a href="/" target="_blank"><img src="{{staticThemePath}}/picture/ad2.jpg" alt="星星海SA2云服务器高性价比首选1核2G首年99元起"></a></div> -->
+    {% include "./public/hotNewsList.html" %}
+  </aside>
+</main>
+<div class="clear blank"></div>
+{% endblock %}

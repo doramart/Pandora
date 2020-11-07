@@ -1,0 +1,65 @@
+{% extends "./default.html" %}
+{% block content %}
+{% import "./public/adsPannel.html" as adsPannel %}
+
+
+<main ms-controller="documentInfo">
+  <div class="lbox">
+    <div class="weizhi">您现在的位置是：<a href="index.html">首页</a>&nbsp;>&nbsp;<a
+        href="{{post.categories[post.categories.length-1].url}}">{{(post.categories[post.categories.length-1]).name}}</a>
+    </div>
+    <article>
+      <h1>{{post.title}}</h1>
+      <div class="wz_info"> <span class="wz_frome"><a href="http://zhuanti.ip3q.com/"
+            target="_blank">{{post.uAuthor.userName}}</a></span><span class="wz_time">{{post.createdAt}}</span> </div>
+      <div class="wz_smalltext">{{post.discription}}</div>
+      <div class="content">
+        {{post.comments | safe}}
+      </div>
+      <div class="wz_zhuanzai">
+        <p>所有文章未经授权禁止转载、摘编、复制或建立镜像，违规转载法律必究。</p>
+        <p>举报邮箱：<a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=doramart@qq.com"
+            target="_blank">doramart@qq.com</a></p>
+      </div>
+      <div class="tags"> 相关标签：
+        {% for tag in post.tags %}
+        <a href="{{tag.url}}">{{tag.name}}</a>
+        {% endfor %}
+      </div>
+      <div class="info-pre-next">
+        {% near_post "id"=post._id %}
+        {% if near_post %}
+        {% if near_post.preContent.title %}
+        <p>上一篇:<a href="{{near_post.preContent.url}}">{{near_post.preContent.title}}</a> </p>
+        {% endif %}
+        {% if near_post.nextContent.title %}
+        <p>下一篇:<a href="{{near_post.nextContent.url}}">{{near_post.nextContent.title}}</a> </p>
+        {% endif %}
+        {% endif %}
+      </div>
+      <div class="ad"><a href="https://www.aliyun.com/minisite/goods?userCode=l1qstn8f&share_source=copy_link"
+          target="_blank"><img src="static/picture/ad3.jpg" alt=""></a></div>
+      {% include './public/randomList.html' %}
+      <div class="pinglun">
+        {% include "./public/msgBoard.html" %}
+      </div>
+    </article>
+  </div>
+  <aside class="rbox">
+    <div class="about"> <i><img src="{{post.uAuthor.logo}}" alt="{{post.uAuthor.userName}}"></i>
+      <p class="about_name">{{post.uAuthor.userName}}</p>
+      <span class="about_num">已更新<b ms-text="@authorConentsInfo.pageInfo.totalItems">25</b>篇文章</span>
+      <ul>
+        <li ms-for="item in @authorConentsInfo.docs"><a ms-attr="{href: @item.url, title: @item.title}" target="_blank"
+            ms-text="@item.title"></a></li>
+      </ul>
+      <a href="/all" target="_blank" class="btn_more">更多文章</a>
+    </div>
+  </aside>
+
+</main>
+<script>
+  var userId = "{{post.uAuthor.id}}";
+  userId && getUserContentsInfo(userId);
+</script>
+{% endblock %}

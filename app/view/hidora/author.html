@@ -1,0 +1,36 @@
+{% extends "./default.html" %} {% block content %}
+<!-- The tag above means: insert everything in this file -->
+<!-- into the {body} of the default.hbs template -->
+
+<!-- Author info  -->
+
+<div id="main">
+    <header class="author-header">
+        {% if author.logo %}
+        <img class="author-profile-image" src="{{author.logo}}" alt="{{author.userName}}" />
+        {% endif %}
+        <h1><a href="{{url}}">{{author.userName}}</a></h1>
+        {% if author.comments %}
+        <p class="content">{{author.comments}}</p>
+        {% endif %}
+        <div class="author-meta">
+
+            {% if author.website %}
+            <a href="{{author.website}}" class="icon fa-globe" title="Website"><span class="label">Website</span></a>
+            {% endif %}
+            {% if author.twitter %}
+            <a href="{{author.twitter}}" class="icon fa-twitter" title="Twitter"><span class="label">Twitter</span></a>
+            {% endif %}
+            {% if author.facebook %}
+            <a href="{{author.facebook}}" class="icon fa-facebook" title="Facebook"><span
+                    class="label">Facebook</span></a>
+            {% endif %}
+            <a href="" class="icon fa-rss" target="_blank" rel="noopener"><span class="label" title="RSS">RSS</span></a>
+        </div>
+    </header>
+
+
+    {% include "./public/itemListTemp.html" %}
+</div>
+
+{% endblock %}

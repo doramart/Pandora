@@ -1,0 +1,13 @@
+{% hot key="hotItemListData","pageSize"=9 %}
+{% if hotItemListData.length > 0 %}
+<div class="hot_news">
+    <p class="h_title">文章热榜</p>
+    <ul>
+     {% for item in hotItemListData %}
+      <li><a href="{{item.url}}" title="" target="_blank"> <i><img src="{{item.sImg}}" alt="{{item.title}}"></i><em>{{loop.index0 + 1}}</em>
+        <h2>{{item.title}}</h2>
+        <span>{{item.createdAt}}</span> </a></li>
+        {% endfor %}
+    </ul>
+  </div>
+{% endif%}

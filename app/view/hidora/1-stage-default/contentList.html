@@ -1,0 +1,31 @@
+{% extends "../default.html" %} {% block content %} {% import "../public/adsPannel.html" as adsPannel %}
+<!-- <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+{% plugin name="twitter-bootstrap" %} -->
+<!-- {% endplugin %} -->
+
+<!-- <style>
+    .pics
+</style> -->
+<main>
+    <div class="weizhi">您现在的位置是：<a href="index.html">首页</a>&nbsp;>&nbsp;<a href="/">案例展示</a></div>
+    <div class="pics show-case">
+        <ul>
+            {% ads name="anli" %}
+            {% for adsItem in anli.items %}
+            <li><a href="{{adsItem.link}}" target="_blank"><i><img src="{{adsItem.sImg}}" alt=""></i>
+                    <p><span>基于DoraCMS</span>{{adsItem.alt}}</p>
+                </a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</main>
+<style>
+    .pics.show-case ul li {
+        width: 20%;
+    }
+
+    .pics.show-case ul li i {
+        height: 66px;
+    }
+</style>
+{% endblock %}

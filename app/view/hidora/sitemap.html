@@ -1,0 +1,31 @@
+<!-- BEGIN SITEMAP -->
+{% extends "./default.html" %} {% block content %}
+<style>
+    .siteMap {
+        padding: 15px;
+    }
+
+    .siteMap ol li {
+        height: 25px;
+    }
+</style>
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <article class=" main-container siteMap">
+                <div class="row">
+                    <ol>
+                        {% for item in siteMapList %}
+                        <li>
+                            <a href="{{item.url}}">{{item.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </article>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+<!-- END SITEMAP -->

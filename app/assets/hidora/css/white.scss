@@ -1,0 +1,197 @@
+@import './bootstrap.scss';
+
+$default-main-color:#16499d;
+
+
+.show {
+    display: block !important;
+}
+
+.newstext span {
+    display: inline-block;
+}
+
+.lanmu {
+    h1 {
+        margin-top: 0;
+    }
+}
+
+.ad-small {
+    min-height: auto;
+}
+
+.dashang-section ul li {
+    margin-right: 10px;
+}
+
+
+.cmscase-pannel {
+    .column-wrap {
+        position: relative;
+
+        .gitstar {
+            position: absolute;
+            right: 18px;
+            top: 10px;
+        }
+    }
+
+    .cmscase-container {
+        margin: 0;
+        min-height: 500px;
+        background-color: #ffffff;
+        padding: 50px 0;
+    }
+}
+
+// 案例展示
+.gap-img-ads {
+    ul {
+        li {
+            margin: 40px 0;
+
+            a {
+                height: 45px;
+                display: block;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            span {
+                font-size: 11px;
+                text-align: center;
+                color: #aaa;
+                display: block;
+                line-height: 36px;
+            }
+        }
+    }
+}
+
+// 文章留言
+.content-message-list .pannel-title {
+    margin-bottom: 10px;
+}
+
+.content-message-list ul li {
+    border-top: 1px solid #efefef;
+    padding: 24px 0 24px;
+    font-size: 14px;
+
+    .col-md-1,
+    .col-xs-1 {
+        padding: 0;
+    }
+
+    .user-logo {
+        img {
+            width: 100%;
+            min-height: 2rem;
+            border-radius: 50%;
+        }
+    }
+
+    .user-name {
+        margin: 0px 0 0px 15px;
+        color: $default-main-color;
+
+        .name {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .time {
+            font-size: 11px;
+            display: inline-block;
+            color: #777;
+        }
+
+        .reply {
+            font-size: 12px;
+            display: none;
+
+            a:link,
+            a:visited {
+                color: #aaa;
+            }
+        }
+    }
+
+    .content-message-post {
+        margin-top: 20px;
+        padding: 15px;
+
+        h2 {
+            small {
+                display: inline-block;
+            }
+        }
+    }
+
+    .msgList.active .reply {
+        display: block;
+    }
+
+    .user-content {
+        position: relative;
+        color: #666666;
+        padding-left: 15px;
+        word-break: break-all;
+    }
+}
+
+// 发表留言
+.content-message-post {
+    margin-bottom: 30px;
+
+    h2 {
+        small {
+            display: none;
+            margin-left: 10px;
+
+            a:link,
+            a:visited {
+                color: $default-main-color;
+            }
+        }
+    }
+
+    .give-message {
+        textarea.form-control {
+            border-color: #efefef !important;
+            border-bottom-color: #f5f5f5 !important;
+            border-width: 1px !important;
+            background: #ffffff !important;
+            border-radius: 0;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+        }
+
+        .send-button {
+            padding: 5px 15px;
+            text-align: right;
+            background: #fbfbfb;
+            border: 1px solid #efefef;
+            border-top: 0;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+            overflow: hidden;
+            line-height: 38px;
+        }
+
+        .user-notice {
+            float: left;
+            font-size: 13px;
+
+            span {
+                display: inline-block;
+            }
+        }
+    }
+}

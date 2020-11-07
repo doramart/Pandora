@@ -1,0 +1,92 @@
+<header ms-controller="headerCtr">
+  <input type="hidden" value="{{userInfo._id}}" id="userId">
+  <input type="hidden" value="{{logined}}" id="logined">
+  <input type="hidden" value="{{tokenId}}" id="tokenId">
+  <div class="top">
+    <div class="box">
+      <div class="welcome">欢迎您访问<a href="/" target="_blank">DoraCMS</a> 本站旨在为大家提供前端开发相关资讯！本站为<a href="/"
+          target="_blank">DoraCMS SQL</a>演示站，<a href="https://github.com/doramart/DoraCMS-SQL" target="_blank">源码下载</a>
+      </div>
+      <div class="guanzhu"><i></i>
+        <ul class="weixin">
+          <li><img src="{{staticThemePath}}/picture/wx.png" alt="微信客服：476847113">微信客服</li>
+          <li><img src="{{staticThemePath}}/picture/wxgzh.jpg" alt="微信公众号">微信公众号</li>
+        </ul>
+      </div>
+      <!--guanzhu end-->
+      <div class="is-search">
+        <section><i></i></section>
+      </div>
+      <div class="search-page">
+        <div class="search_box">
+          <div class="go-left"></div>
+          <div class="search">
+            <input name="keyboard" id="keyboard" ms-duplex="@searchkey" ms-on-keyup="@onKeyUp" class="input_text"
+              value="请输入关键字词" style="color: rgb(153, 153, 153);"
+              onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}"
+              onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
+            <input name="show" value="title" type="hidden">
+            <input name="tempid" value="1" type="hidden">
+            <select name="tbname">
+              <option value="news">资讯</option>
+            </select>
+            <input name="Submit" class="input_submit" value="搜索" type="submit">
+          </div>
+          <div class="clear"></div>
+          <div class="hot-search">
+            <p>热门搜索/Hot Search</p>
+            <ul class="search-paihang">
+              <li><a href="/">doracms</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--search-page end-->
+    </div>
+  </div>
+  <!--top end-->
+  <nav>
+    <div class="box">
+      <div class="logo"><a href="/" target="_blank"><img src="{{staticThemePath}}/picture/logo.png"
+            alt="3D生态网_3D打印技术_3D模型免费下载"></a></div>
+      <ul id="starlist">
+        <li><a href="/">首页</a></li>
+        {% navtree 'default' %}
+        {% for cate in navtree %}
+        {% if cate.children and cate.children.length>0 and cate.type == '1'%}
+        <li class="menu"><a href="{{cate.url}}">{{cate.name}}</a>
+
+          <ul class="sub">
+            {% for sonNav in cate.children %}
+            <li><a href="{{sonNav.url}}">{{sonNav.name}}</a></li>
+            {% endfor %}
+          </ul>
+          <span></span>
+
+        </li>
+        {% else %}
+        <li><a href="{{cate.url}}">{{cate.name}}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        <li><a href="/all">所有文章</a></li>
+        <!-- <li><a href="zhuanti.html">专题封面</a></li>
+        <li><a href="list(zhuanti).html">专题列表</a></li>
+        <li class="menu"><a href="javascript:;">内容页</a>
+          <ul class="sub">
+            <li><a href="info(news).html">文章内容页</a></li>
+            <li><a href="info(pics).html">图片内容页</a></li>
+          </ul>
+          <span></span></li> -->
+        <!-- <li class="menu"><a href="javascript:;">其他单页</a>
+          <ul class="sub">
+            <li><a href="about.html">关于我们</a></li>
+            <li><a href="40/">404页面</a></li>
+            <li><a href="tags.html">标签合集</a></li>
+          </ul>
+          <span></span></li> -->
+      </ul>
+    </div>
+  </nav>
+  <h2 id="mnavh"><span class="navicon"></span></h2>
+</header>

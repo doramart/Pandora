@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    {% header adaptor="modernizr" %}
+
+    <!-- 模板静态资源 -->
+    {% assets 'base.css m.css swiper.min.css jquery-1.8.3.min.js comm.js swiper.min.js' %}
+    {% endassets %}
+
+    <!-- 二次开发静态资源 -->
+    {% assets 'dora.front.js white.css' %}
+    {% endassets %}
+
+    {% endheader %}
+
+</head>
+
+
+<body class="is-preload {{body_class}}">
+
+    <!-- Nav -->
+    {% include "./public/header.html" %}
+
+    <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+    {% block content %}{% endblock %}
+
+    <!-- The footer at the very bottom of the screen -->
+
+    {% include "./public/footer.html" %}
+
+
+
+</body>
+
+</html>

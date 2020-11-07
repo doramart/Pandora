@@ -1,0 +1,20 @@
+{
+  "name": "build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "buildModules.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installModules": "cross-env NODE_ENV=development && node ./installModules",
+    "buildDevModules": "cross-env NODE_ENV=production && node ./buildModules",
+    "buildPrdModules": "cross-env NODE_ENV=production && node ./buildModules --type prd"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cnpm": "^6.1.1",
+    "cross-env": "^6.0.3",
+    "qiniu": "^7.2.2",
+    "shelljs": "^0.8.3"
+  }
+}

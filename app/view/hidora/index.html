@@ -1,0 +1,74 @@
+{% extends "./default.html" %}
+{% import "./public/adsPannel.html" as adsPannel %}
+{% block content %}
+<main>
+  <div class="lbox">
+    <div class="swiper-container banner">
+      {% ads name="recommend" %}
+      <div class="swiper-wrapper">
+        {% for adsItem in recommend.items %}
+        <div class="swiper-slide"> <a href="{{adsItem.link}}" target="_blank"><img src="{{adsItem.sImg}}"
+              alt="【阿里云】专属小站折扣价，新用户独享优惠">
+            <section>
+              <h4>{{adsItem.alt}}</h4>
+            </section>
+          </a></div>
+        {% endfor %}
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+    <script>
+      //banner	
+      var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        paginationClickable: true,
+        spaceBetween: 100,
+        centeredSlides: true,
+        autoplay: 8000,
+        autoplayDisableOnInteraction: false,
+      });
+    </script>
+    <!-- banner end-->
+    <div class="headline">
+      <ul>
+        {% recommend key="reCommendListTop",pageSize=2 %}
+        {% if reCommendListTop.length > 0 %}
+        {% for item in reCommendListTop%}
+        <li><a href="{{item.url}}" title="{{item.title}}"><img src="{{item.sImg}}" alt="{{item.title}}"><span>
+              <h4>{{item.title}}</h4>
+            </span></a></li>
+        {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+    <!--headline end-->
+    <div class="clear"></div>
+    <div class="h_title">最新文章</div>
+    <div class="blogs">
+      <ul>
+        {% include './public/itemListTemp.html' %}
+      </ul>
+    </div>
+  </div>
+  <aside class="rbox">
+    {% include './public/reCommendList.html' %}
+    <div class="lm_hot">
+      <p class="h_title">精选标签</p>
+      <ul>
+        {% hottags pageSize=4 %}
+        {% for tagItem in hottags %}
+        <a href="{{tagItem.url}}" target="_blank">{{tagItem.name}}</a>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="ad"><a href="https://www.aliyun.com/minisite/goods?userCode=l1qstn8f&share_source=copy_link"
+        target="_blank"><img src="{{staticThemePath}}/picture/ad.jpg" alt="阿里云优惠券"></a></div>
+    {% include './public/hotNewsList.html' %}
+  </aside>
+</main>
+{% endblock %}

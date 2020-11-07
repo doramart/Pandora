@@ -1,0 +1,49 @@
+{% macro slider(targetAds) %}
+{% if targetAds %}
+
+{% if targetAds.type == '1' %}
+{% if (targetAds.carousel) and (targetAds.items.length > 0) %}
+<div class="swiper-container banner">
+    <div class="swiper-wrapper">
+        {% for item in targetAds.items %}
+        <div class="swiper-slide"><a style="height:100%" href="{{item.link}}" alt="{{item.alt}}"><img
+                    src="{{item.sImg}}" style="height:100%"><span>推荐</span></a></div>
+        {%endfor%}
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+{% elif targetAds.items.length > 1 %}
+<div class="gap-img-ads">
+    <ul>
+        {% for item in targetAds.items %}
+        <li class="col-xs-6 col-md-3">
+            <a href="{{item.link}}" target="_blank">
+                <img src="{{item.sImg}}" alt="{{item.title}}">
+            </a>
+
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% elif targetAds.items.length == 1%} {% set normalAds = targetAds.items[0] %}
+<div class="normal-img-ads">
+    <a href="{{normalAds.link}}" target="_blank">
+        <img src="{{ normalAds.sImg}}" alt="{{normalAds.title}}">
+    </a>
+</div>
+{% endif %}
+{% elif targetAds.type == '0' %}
+<div class="normal-text-ads">
+    <ul>
+        {% for item in targetAds.items %}
+        <li>
+            <a target="_blank" href="{{item.link}}">{{item.title}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endif %}
+{% endmacro %}

@@ -1,0 +1,16 @@
+<!--文章推荐模块-->
+{% random "pageSize"=6 %}
+
+<div class="wz_tuijian">
+<p>推荐阅读</p>
+<ul>
+    {% if random.length > 0 %} {% for item in random %}
+
+    <li><a href="" target="_blank"> <i><img src="{{item.sImg}}" alt="{{item.title}}"></i>
+    <h2>{{item.title}}</h2>
+    <span>{{item.createdAt}}</span> </a></li>
+    {% endfor %} {% else %}
+        <p class="text-center">暂无内容...</p>
+        {% endif%}
+</ul>
+</div>

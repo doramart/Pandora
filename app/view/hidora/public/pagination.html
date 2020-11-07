@@ -1,0 +1,72 @@
+<!--分页模块-->
+<div class="pagelist">
+
+    {% if pageInfo.totalItems > 0 %}
+    {% set localUrl = "" %}
+    {% set param = "" %}
+    {% set pageInfo = pageInfo %}
+
+    {% if pageType == 'index' %}
+    {% set localUrl = "/page" %}
+    {% elif pageType == 'all' %}
+    {% set localUrl = "/all" %}
+    {% elif pageType == 'cate' %}
+    {% set localUrl = cateInfo.url %}
+    {% elif pageType == 'author' %}
+    {% set localUrl = '/author/' + author._id%}
+    {% elif pageType == 'search' %}
+    {% set param = '?searchKey=' + pageInfo.searchkey %}
+    {% set localUrl = '/search/' + pageInfo.searchkey %}
+    {% elif pageType == 'tag' %}
+    {% set param = '?tagKey=' + targetTagName %}
+    {% set localUrl = '/tag/' + targetTagName %}
+    {% elif pageType == 'replies' %}
+    {% set localUrl = '/users/userReplies/p' %}
+    {% elif pageType == 'notifies' %}
+    {% set localUrl = '/users/userNotifies/p' %}
+    {% endif %}
+
+    {% set totalItems = pageInfo.totalItems %}
+    {% set pageSize = pageInfo.pageSize %}
+    {% set totalPage = pageInfo.totalPage%}
+
+    {% if pageInfo.current - 2 > 0 %}
+    {% set page_start = pageInfo.current - 2 %}
+    {% else %}
+    {% set page_start = 1 %}
+    {% endif %}
+
+    {% if page_start + 4 >= totalPage %}
+    {% set page_end = totalPage %}
+    {% else %}
+    {% set page_end = page_start + 4 %}
+    {% endif %}
+
+    {% if pageInfo.current != 1 %}
+    <a class="allpage previous newer-posts" href="{{localUrl}}/1.html{{param}}">«</a>
+    {% endif %}
+
+    {% if page_start > 1 %}
+    <a>...</a>
+    {% endif %}
+
+    {% for i in range(page_start, page_end + 1) -%}
+    {% if i ==  pageInfo.current%}
+    <b>{{i}}</b>
+    {% else %}
+    <a class="allpage curPage" href="{{localUrl}}/{{i}}.html">{{i}}</a>
+    {% endif %}
+    {%- endfor %}
+
+    {% if page_end < totalPage %}
+    <a>...</a>
+    {% endif %}
+
+    {% if pageInfo.current != totalPage %}
+    <a class="allpage next older-posts" href="{{localUrl}}/{{totalPage}}.html{{param}}">»</a>
+    {% endif %}
+
+    {% endif %}
+
+
+</div>

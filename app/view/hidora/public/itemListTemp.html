@@ -1,0 +1,16 @@
+
+	{% for item in posts %}
+	<li class="blogs_list"> <a href="{{item.url}}" target="_blank"><i><img src="{{item.sImg}}" alt="{{item.title}}"></i>
+		<h2>{{item.title}}</h2>
+		</a>
+		<p>{{item.discription}}</p>
+		<div class="blogs_writer">{{item.uAuthor.userName}}<span class="blogs_time">2020-10-18</span></div>
+		<div class="blogs_tags">
+			{% for tag in item.tags %}
+            <a href="{{tag.url}}">{{tag.name}}</a>
+            {% endfor %}
+		</div>
+		<span class="blogs_lm"><a href="{{item.categories[0].url}}" target="_blank">{{item.categories[0].name}}</a></span> </li>
+	{% endfor %}
+	<br/>
+	{% include "./pagination.html" %}

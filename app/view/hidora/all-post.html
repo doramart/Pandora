@@ -1,0 +1,27 @@
+{% extends "./default.html" %}
+{% block content %}
+{% import "./public/adsPannel.html" as adsPannel %}
+
+
+<main>
+  <div class="lbox">
+    <div class="weizhi">您现在的位置是：<a href="index.html">首页</a> > 所有文章</div>
+    <div class="time_box">
+      <ul>
+        {% for item in posts %}
+        <li><span>{{item.createdAt}}</span> <a href="{{item.url}}" target="_blank">
+          <h2>{{item.title}}</h2>
+          <i><img src="{{item.sImg}}" alt="{{item.title}}"></i></a>
+          <p>{{item.discription}}</p>
+          <a href="{{item.categries[0].url}}" target="_blank" class="time_lm">{{item.categries[0].name}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <br/>
+    {% include "./public/pagination.html" %}  </div>
+  <aside class="rbox">
+    {% include "./public/hotNewsList.html" %}
+  </aside>
+</main>
+<div class="clear blank"></div>
+{% endblock %}

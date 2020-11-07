@@ -1,0 +1,19 @@
+{% extends "./default.html" %}
+{% block content %}
+
+<main>
+  <div class="weizhi">您现在的位置是：<a href="/">首页</a>&nbsp;>&nbsp;<a href="/">标签合集</a></div>
+  <div class="tags_box" style="min-height: 500px;">
+    <ul>
+      {% for tag in tags %}
+
+      <a href="{{tag.url}}" target="_blank">{{tag.name}}</a> 
+
+      {% endfor %}
+      <!-- <a href="/" target="_blank">3D打印</a> <a href="/" target="_blank">solidworks</a> <a href="/" target="_blank">SolidEdge</a> <a href="/" target="_blank">工业制造</a> <a href="/" target="_blank">机械设计</a> <a href="/" target="_blank">3D模型</a> <a href="/" target="_blank">3D眼镜</a> <a href="/" target="_blank">创业</a> <a href="/" target="_blank">3D</a> <a href="/" target="_blank">三维模型教程</a> <a href="/" target="_blank">PLM</a> <a href="/" target="_blank">3D影像</a> <a href="/" target="_blank">3D地图数据</a> <a href="/" target="_blank">苹果</a> <a href="/" target="_blank">ProECreo</a> <a href="/" target="_blank">CAD</a> <a href="/" target="_blank">3D打印机</a> <a href="/" target="_blank">三维建模师</a> <a href="/" target="_blank">3D设计</a> <a href="/" target="_blank">机械工业</a> <a href="/" target="_blank">三维模型</a> <a href="/" target="_blank">3D打印</a> <a href="/" target="_blank">solidworks</a> <a href="/" target="_blank">SolidEdge</a> <a href="/" target="_blank">工业制造</a> <a href="/" target="_blank">机械设计</a> <a href="/" target="_blank">3D模型</a> <a href="/" target="_blank">3D眼镜</a> <a href="/" target="_blank">创业</a> <a href="/" target="_blank">3D</a> <a href="/" target="_blank">三维模型教程</a> <a href="/" target="_blank">PLM</a> <a href="/" target="_blank">3D影像</a> <a href="/" target="_blank">3D地图数据</a> <a href="/" target="_blank">苹果</a> <a href="/" target="_blank">ProECreo</a> <a href="/" target="_blank">CAD</a> <a href="/" target="_blank">3D打印机</a> <a href="/" target="_blank">三维建模师</a> <a href="/" target="_blank">3D设计</a> <a href="/" target="_blank">机械工业</a> <a href="/" target="_blank">三维模型</a> <a href="/" target="_blank">3D打印</a> <a href="/" target="_blank">solidworks</a> <a href="/" target="_blank">SolidEdge</a> <a href="/" target="_blank">工业制造</a> <a href="/" target="_blank">机械设计</a> <a href="/" target="_blank">3D模型</a> <a href="/" target="_blank">3D眼镜</a> <a href="/" target="_blank">创业</a> <a href="/" target="_blank">3D</a> <a href="/" target="_blank">三维模型教程</a> <a href="/" target="_blank">PLM</a> <a href="/" target="_blank">3D影像</a> <a href="/" target="_blank">3D地图数据</a> <a href="/" target="_blank">苹果</a> <a href="/" target="_blank">ProECreo</a> <a href="/" target="_blank">CAD</a> <a href="/" target="_blank">3D打印机</a> <a href="/" target="_blank">三维建模师</a> <a href="/" target="_blank">3D设计</a> <a href="/" target="_blank">机械工业</a> <a href="/" target="_blank">三维模型</a> <a href="/" target="_blank">3D打印</a> <a href="/" target="_blank">solidworks</a> <a href="/" target="_blank">SolidEdge</a> <a href="/" target="_blank">工业制造</a> <a href="/" target="_blank">机械设计</a> <a href="/" target="_blank">3D模型</a> <a href="/" target="_blank">3D眼镜</a> <a href="/" target="_blank">创业</a> <a href="/" target="_blank">3D</a> <a href="/" target="_blank">三维模型教程</a> <a href="/" target="_blank">PLM</a> <a href="/" target="_blank">3D影像</a> <a href="/" target="_blank">3D地图数据</a> <a href="/" target="_blank">苹果</a> <a href="/" target="_blank">ProECreo</a> <a href="/" target="_blank">CAD</a> <a href="/" target="_blank">3D打印机</a> <a href="/" target="_blank">三维建模师</a> <a href="/" target="_blank">3D设计</a> <a href="/" target="_blank">机械工业</a> -->
+    </ul>
+  </div>
+</main>
+
+
+{% endblock %}
