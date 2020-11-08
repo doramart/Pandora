@@ -49,7 +49,7 @@ module.exports = appInfo => {
             port: 3306,
             database: 'doracms', //mysql database dir
             username: "root",
-            password: "123456",
+            password: "12345678",
             delegate: 'model'
         },
         static: {

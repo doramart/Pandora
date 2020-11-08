@@ -11,6 +11,9 @@ run/
 package-lock.json
 app/ext
 app/controller/ext
+app/public/upload/*
+app/public/upload/!.gitkeep
+
 
 
 

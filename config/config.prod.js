@@ -14,10 +14,10 @@ module.exports = appInfo => {
         sequelize: {
             dialect: 'mysql',
             host: '127.0.0.1',
-            port: 26987,
+            port: 3306,
             database: 'doracms', //mysql database dir
             username: "root",
-            password: "123456",
+            password: "12345678",
             delegate: 'model'
         },
         // 静态目录
