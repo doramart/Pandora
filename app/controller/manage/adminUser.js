@@ -2,7 +2,7 @@
  * @Author: doramart 
  * @Date: 2019-06-20 18:55:40 
  * @Last Modified by: doramart
- * @Last Modified time: 2020-11-08 00:07:51
+ * @Last Modified time: 2020-11-09 22:55:45
  */
 const Controller = require('egg').Controller;
 const {
@@ -82,7 +82,7 @@ class AdminUserController extends Controller {
                 countryCode: fields.countryCode,
                 password: fields.password,
                 confirm: fields.confirm,
-                group_id: fields.group,
+                group_id: fields.group_id,
                 enable: fields.enable,
                 comments: fields.comments
             }
@@ -169,7 +169,7 @@ class AdminUserController extends Controller {
                 logo: fields.logo,
                 phoneNum: fields.phoneNum,
                 countryCode: fields.countryCode,
-                group_id: fields.group,
+                group_id: fields.group_id,
                 enable: fields.enable,
                 comments: fields.comments
             }
@@ -378,14 +378,6 @@ class AdminUserController extends Controller {
                 query: {
                     id: ctx.session.adminUserInfo.id
                 },
-                include: [{
-                    as: 'group',
-                    attributes: ['power', 'id', 'name'],
-                    model: "AdminGroup"
-                }, {
-                    as: 'targetEditor',
-                    attributes: ['userName', 'id']
-                }],
                 attributes: ['enable', 'password', 'id', 'email', 'userName', 'logo']
             })
 
