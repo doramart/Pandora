@@ -2,7 +2,7 @@
  * @Author: doramart 
  * @Date: 2019-06-24 13:20:49 
  * @Last Modified by: doramart
- * @Last Modified time: 2020-08-19 12:27:30
+ * @Last Modified time: 2020-11-09 22:45:38
  */
 
 'use strict';
@@ -75,6 +75,10 @@ class AdminUserService extends Service {
                 as: 'group',
                 attributes: ['power', 'id', 'name'],
                 model: "AdminGroup"
+            }, {
+                as: 'targetEditor',
+                attributes: ['id', '_id', 'userName'],
+                model: "User"
             }],
         })
     }

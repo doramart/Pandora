@@ -54,7 +54,7 @@ module.exports = app => {
             defaultValue: false
         },
         group_id: INTEGER,
-        // editor_id: INTEGER,
+        editor_id: INTEGER,
         comments: TEXT('long'),
         phoneNum: CHAR(11),
         createdAt: {
@@ -82,10 +82,6 @@ module.exports = app => {
             as: 'group'
         });
 
-        // app.model.AdminUser.belongsTo(app.model.User, {
-        //     foreignKey: 'editor_id',
-        //     as: 'targetEditor'
-        // });
 
     }
 

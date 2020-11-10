@@ -9,7 +9,7 @@
     "crypto-js": "^4.0.0",
     "egg": "^2.3.0",
     "egg-doras-middlestage": "^1.0.0",
-    "egg-doras-uploadfile": "^1.0.0",
+    "egg-doras-uploadfile": "^1.0.5",
     "egg-doras-validate": "^1.0.1",
     "egg-scripts": "^2.11.0",
     "egg-sequelize": "^5.2.2",
@@ -60,7 +60,6 @@
     "pkgfiles": "egg-bin pkgfiles",
     "doracms": "node ./install/index.js",
     "publishThemes": "node ./build/publishThemes",
-    
     "makeReleasePro": "node ./build/renderPro --type release",
     "makeAdminScaffoldPro": "node ./build/renderPro --type adminScaffold",
     "makeGitHubPro": "node ./build/renderPro --type github",
