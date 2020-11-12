@@ -94,8 +94,8 @@ http://127.0.0.1:10003/dr-admin
 ```
 
 ### mongodb 版本
-[DoraCMS mysql 源码](https://github.com/doramart/DoraCMS)   
-[DoraCMS mysql 版本预览](https://www.html-js.cn/) 
+[DoraCMS mongodb 源码](https://github.com/doramart/DoraCMS)   
+[DoraCMS mongodb 版本预览](https://www.html-js.cn/) 
 
 
 
