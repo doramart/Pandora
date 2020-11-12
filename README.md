@@ -93,6 +93,12 @@ http://127.0.0.1:10003/dr-admin
 登录账号：doramart/123456    doracms/123456
 ```
 
+### mysql 版本
+[DoraCMS mysql 源码](https://github.com/doramart/DoraCMS-SQL)   
+[DoraCMS mysql 版本预览](https://sql.html-js.cn/) 
+> 数据库通过花生壳连接，可能有所延时
+
+
 
 ## 技术交流群
 <img width="650" src="http://cdn.html-js.cn/contactbywechatqq1.jpg" alt="">
