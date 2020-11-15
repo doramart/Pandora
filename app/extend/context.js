@@ -7,7 +7,7 @@ module.exports = {
 
     async getSiteInfo() {
         let ctx = this;
-        // console.log('--ctx.originalUrl--', ctx.originalUrl)
+        let ctxParams = ctx.params || {};
         let configs = await ctx.helper.reqJsonData('systemConfig/getConfig');
         const {
             siteName,
@@ -23,7 +23,7 @@ module.exports = {
             title,
             des,
             keywords
-        } = ctx.params;
+        } = ctxParams;
         let pageTitle = title ? (title + ' | ' + siteName) : siteName;
         let discription = des ? des : siteDiscription;
         let key = keywords ? keywords : siteKeywords;
