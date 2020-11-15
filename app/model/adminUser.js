@@ -82,7 +82,6 @@ module.exports = app => {
             as: 'group'
         });
 
-
     }
 
     AdminUser.sync({
