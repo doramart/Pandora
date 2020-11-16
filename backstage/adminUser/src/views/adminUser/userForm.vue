@@ -56,7 +56,7 @@
         <el-form-item :label="$t('adminUser.lb_userGroup')" prop="group">
           <el-select
             size="small"
-            v-model="dialogState.formData.group"
+            v-model="dialogState.formData.group_id"
             :placeholder="$t('main.ask_select_label')"
           >
             <el-option
@@ -203,7 +203,7 @@ export default {
             trigger: "blur",
           },
         ],
-        group: [
+        group_id: [
           {
             required: true,
             message: this.$t("validate.selectNull", {
