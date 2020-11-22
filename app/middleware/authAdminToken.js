@@ -2,7 +2,7 @@
  * @Author: doramart 
  * @Date: 2019-08-16 14:51:46 
  * @Last Modified by: doramart
- * @Last Modified time: 2020-08-14 20:40:17
+ * @Last Modified time: 2020-11-13 23:19:31
  */
 
 const {
@@ -49,12 +49,14 @@ module.exports = (options, app) => {
                             userName,
                             id,
                             group,
+                            editor_id
                         } = targetUser;
 
                         ctx.session.adminUserInfo = {
                             userName,
                             id,
-                            group
+                            group,
+                            editor_id
                         };
 
                         await next();

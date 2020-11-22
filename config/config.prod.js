@@ -5,7 +5,7 @@ module.exports = appInfo => {
 
     return {
         // 插件路径
-        admin_root_path: 'https://cdn.html-js.cn/cms/plugins/static/sadmin',
+        admin_root_path: '/static',
         // 数据库连接
         sqlPath: {
             bin: '',

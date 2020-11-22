@@ -53,17 +53,17 @@
             v-model="dialogState.formData.confirmPassword"
           ></el-input>
         </el-form-item>
-        <el-form-item :label="$t('adminUser.lb_userGroup')" prop="group">
+        <el-form-item :label="$t('adminUser.lb_userGroup')" prop="group_id">
           <el-select
             size="small"
-            v-model="dialogState.formData.group"
+            v-model="dialogState.formData.group_id"
             :placeholder="$t('main.ask_select_label')"
           >
             <el-option
               :key="index"
               v-for="(group,index) in groups"
               :label="group.name"
-              :value="group._id"
+              :value="group.id"
             ></el-option>
           </el-select>
         </el-form-item>
@@ -203,7 +203,7 @@ export default {
             trigger: "blur",
           },
         ],
-        group: [
+        group_id: [
           {
             required: true,
             message: this.$t("validate.selectNull", {

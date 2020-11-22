@@ -1,6 +1,6 @@
 {
   "name": "egg-doras-content",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "content",
   "eggPlugin": {
     "name": "doraContent"

@@ -93,6 +93,11 @@ http://127.0.0.1:10003/dr-admin
 登录账号：doramart/123456    doracms/123456
 ```
 
+### mongodb 版本
+[DoraCMS mongodb 源码](https://github.com/doramart/DoraCMS)   
+[DoraCMS mongodb 版本预览](https://www.html-js.cn/) 
+
+
 
 ## 技术交流群
 <img width="650" src="http://cdn.html-js.cn/contactbywechatqq1.jpg" alt="">
