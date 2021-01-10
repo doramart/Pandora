@@ -485,6 +485,7 @@ export default {
           this.loadingObj.close();
           if (result.status === 200) {
             this.$store.dispatch("templateConfig/getMyTemplateList");
+            this.$store.dispatch("templateConfig/getTemplateItemForderList");
             this.$message({
               message: this.$t("main.updateSuccess"),
               type: "success"
