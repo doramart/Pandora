@@ -1,9 +1,9 @@
-# DoraCMS-SQL 2.1.7
+# Pandora CMS-SQL 
 
 ![DoraCMS](https://ae01.alicdn.com/kf/H114ba4fd0eab4f36a4b16d970e11222dz.png "DoraCMS")
 
 
-## DoraCMS 视频简介
+## Pandora CMS 视频简介
 
 [DoraCMS 视频简介](https://www.bilibili.com/video/av77251776/)  
 
@@ -19,14 +19,14 @@
 3、mariadb 10 / mysql 8
 ```
 
-文档： [DoraCMS 开发文档](https://www.doracms.com)  
-API： [DoraCMS API文档](https://www.html-js.cn/static/apidoc/index.html)  
+文档： [Pandora CMS 开发文档](https://www.doracms.com)  
+API： [Pandora CMS API文档](https://www.html-js.cn/static/apidoc/index.html)  
 演示地址： [前端开发俱乐部](https://sql.html-js.cn)  
 
 后台登录： https://sql.html-js.cn/dr-admin  
 测试账号：doracms/123456  
 
-### DoraCMS 安装：
+### Pandora CMS 安装：
 
 **创建项目需要的数据库，登录 MySQL 创建数据库**
 
@@ -46,7 +46,7 @@ show databases;
 use doracms;
 ```
 
-**导入SQL文件，生成数据库表，SQL 文件在 DoraCMS 的 databak 目录，**
+**导入SQL文件，生成数据库表，SQL 文件在 Pandora CMS 的 databak 目录，**
 
 > 目录改成，自己的 doracms.sql 文件目录
 
