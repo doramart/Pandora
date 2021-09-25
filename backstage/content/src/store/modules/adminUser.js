@@ -1,55 +1,40 @@
-import {
-  getInfo
-} from '@/api/adminUser'
-import {
-  getToken,
-  removeToken
-} from '@root/publicMethods/auth'
-
+import { getInfo } from '@/api/adminUser';
+import { getToken } from '@root/publicMethods/auth';
 
 const state = {
   token: getToken(),
-  userInfo: ""
-}
-
+  userInfo: '',
+};
 
 const mutations = {
-
   SET_ADMINUSERINFO: (state, adminUserInfo) => {
-    state.userInfo = adminUserInfo
+    state.userInfo = adminUserInfo;
   },
-
-}
+};
 
 const actions = {
-
   // get user info
-  getUserInfo({
-    commit,
-    state
-  }) {
+  getUserInfo({ commit }) {
     return new Promise((resolve, reject) => {
-      getInfo().then(response => {
-        const {
-          data
-        } = response
+      getInfo()
+        .then((response) => {
+          const { data } = response;
 
-        if (!data) {
-          reject('Verification failed, please Login again.')
-        }
-        commit("SET_ADMINUSERINFO", data.userInfo);
-      }).catch(error => {
-        reject(error)
-      })
-    })
+          if (!data) {
+            reject(new Error('Verification failed, please Login again.'));
+          }
+          commit('SET_ADMINUSERINFO', data.userInfo);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
-
-
-}
+};
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
-}
+  actions,
+};

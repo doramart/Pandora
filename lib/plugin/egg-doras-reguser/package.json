@@ -1,6 +1,6 @@
 {
   "name": "egg-doras-reguser",
-  "version": "1.0.5",
+  "version": "1.0.13",
   "description": "regUser",
   "eggPlugin": {
     "name": "doraRegUser"
@@ -11,15 +11,16 @@
     "egg-plugin"
   ],
   "dependencies": {
-    "moment": "^2.24.0",
-    "lodash": "^4.17.15",
-    "xss": "^1.0.6",
-    "jsonwebtoken": "^8.5.1",
-    "validator": "^11.1.0",
-    "trek-captcha": "^0.4.0",
+    "@alicloud/pop-core": "^1.7.10",
     "egg-doras-content": "^1.0.0",
     "egg-doras-contentmessage": "^1.0.0",
-    "egg-doras-mailtemplate": "^1.0.0"
+    "egg-doras-mailtemplate": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "trek-captcha": "^0.4.0",
+    "validator": "^11.1.0",
+    "xss": "^1.0.6"
   },
   "devDependencies": {
     "autod": "^3.0.1",

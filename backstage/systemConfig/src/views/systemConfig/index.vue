@@ -11,17 +11,26 @@
             class="demo-ruleForm"
             :label-position="device == 'mobile' ? 'top' : 'right'"
           >
-            <el-form-item :label="$t('sysTemConfigs.site_name')" prop="siteName">
-              <el-input size="small" v-model="systemConfig.configs.siteName"></el-input>
+            <el-form-item
+              :label="$t('sysTemConfigs.site_name')"
+              prop="siteName"
+            >
+              <el-input
+                size="small"
+                v-model="systemConfig.configs.siteName"
+              ></el-input>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.site_logo')" prop="siteLogo">
+            <el-form-item
+              :label="$t('sysTemConfigs.site_logo')"
+              prop="siteLogo"
+            >
               <el-upload
                 class="avatar-uploader"
                 action="/api/upload/files"
                 :show-file-list="false"
                 :on-success="handleLogoSuccess"
                 :before-upload="beforeLogoUpload"
-                :data="{action:'uploadimage'}"
+                :data="{ action: 'uploadimage' }"
               >
                 <img
                   v-if="systemConfig.configs.siteLogo"
@@ -32,28 +41,73 @@
               </el-upload>
             </el-form-item>
             <el-form-item label="详情标题" prop="ogTitle">
-              <el-input size="small" v-model="systemConfig.configs.ogTitle"></el-input>
+              <el-input
+                size="small"
+                v-model="systemConfig.configs.ogTitle"
+              ></el-input>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.site_domain')" prop="siteDomain">
-              <el-input size="small" v-model="systemConfig.configs.siteDomain"></el-input>
+            <el-form-item
+              :label="$t('sysTemConfigs.site_domain')"
+              prop="siteDomain"
+            >
+              <el-input
+                size="small"
+                v-model="systemConfig.configs.siteDomain"
+              ></el-input>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.site_dis')" prop="siteDiscription">
-              <el-input size="small" v-model="systemConfig.configs.siteDiscription"></el-input>
+            <el-form-item
+              :label="$t('sysTemConfigs.site_dis')"
+              prop="siteDiscription"
+            >
+              <el-input
+                size="small"
+                v-model="systemConfig.configs.siteDiscription"
+              ></el-input>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.site_keyWords')" prop="siteKeywords">
-              <el-input size="small" v-model="systemConfig.configs.siteKeywords"></el-input>
+            <el-form-item
+              :label="$t('sysTemConfigs.site_keyWords')"
+              prop="siteKeywords"
+            >
+              <el-input
+                size="small"
+                v-model="systemConfig.configs.siteKeywords"
+              ></el-input>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.site_tags')" prop="siteAltKeywords">
-              <el-input size="small" v-model="systemConfig.configs.siteAltKeywords"></el-input>
+            <el-form-item
+              :label="$t('sysTemConfigs.site_tags')"
+              prop="siteAltKeywords"
+            >
+              <el-input
+                size="small"
+                v-model="systemConfig.configs.siteAltKeywords"
+              ></el-input>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.site_verify_code')" prop="showImgCode">
+            <el-form-item
+              :label="$t('sysTemConfigs.site_verify_code')"
+              prop="showImgCode"
+            >
               <el-switch
                 :on-text="$t('main.radioOn')"
                 :off-text="$t('main.radioOff')"
                 v-model="systemConfig.configs.showImgCode"
               ></el-switch>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.email_server')" prop="siteEmailServer">
+            <el-form-item
+              :label="$t('sysTemConfigs.editor_type')"
+              label-width="100px"
+              prop="editorType"
+            >
+              <el-radio v-model="systemConfig.configs.editorType" label="2"
+                >Markdown</el-radio
+              >
+              <el-radio v-model="systemConfig.configs.editorType" label="1"
+                >Html</el-radio
+              >
+            </el-form-item>
+            <el-form-item
+              :label="$t('sysTemConfigs.email_server')"
+              prop="siteEmailServer"
+            >
               <el-select
                 size="small"
                 v-model="systemConfig.configs.siteEmailServer"
@@ -67,10 +121,19 @@
                 ></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.site_email')" prop="siteEmail">
-              <el-input size="small" v-model="systemConfig.configs.siteEmail"></el-input>
+            <el-form-item
+              :label="$t('sysTemConfigs.site_email')"
+              prop="siteEmail"
+            >
+              <el-input
+                size="small"
+                v-model="systemConfig.configs.siteEmail"
+              ></el-input>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.site_email_password')" prop="siteEmailPwd">
+            <el-form-item
+              :label="$t('sysTemConfigs.site_email_password')"
+              prop="siteEmailPwd"
+            >
               <el-input
                 size="small"
                 :placeholder="$t('main.noModifyPasswordTips')"
@@ -78,19 +141,34 @@
                 v-model="systemConfig.configs.siteEmailPwd"
               ></el-input>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.site_icp')" prop="registrationNo">
-              <el-input size="small" v-model="systemConfig.configs.registrationNo"></el-input>
+            <el-form-item
+              :label="$t('sysTemConfigs.site_icp')"
+              prop="registrationNo"
+            >
+              <el-input
+                size="small"
+                v-model="systemConfig.configs.registrationNo"
+              ></el-input>
             </el-form-item>
-            <el-form-item :label="$t('sysTemConfigs.statisticalCode')" prop="statisticalCode">
-              <el-input size="small" v-model="systemConfig.configs.statisticalCode"></el-input>
+            <el-form-item
+              :label="$t('sysTemConfigs.statisticalCode')"
+              prop="statisticalCode"
+            >
+              <el-input
+                size="small"
+                v-model="systemConfig.configs.statisticalCode"
+              ></el-input>
             </el-form-item>
             <el-form-item>
               <el-button
                 size="medium"
                 type="primary"
                 @click="submitForm('ruleForm')"
-              >{{$t('main.form_btnText_save')}}</el-button>
-              <el-button size="medium" @click="resetForm('ruleForm')">{{$t('main.reSetBtnText')}}</el-button>
+                >{{ $t('main.form_btnText_save') }}</el-button
+              >
+              <el-button size="medium" @click="resetForm('ruleForm')">{{
+                $t('main.reSetBtnText')
+              }}</el-button>
             </el-form-item>
           </el-form>
         </el-col>
@@ -99,71 +177,71 @@
   </div>
 </template>
 <script>
-import { updateSystemConfigs } from "@/api/systemConfig";
-import { checkUrl, checkEmail } from "@/utils/validate";
-import { initEvent } from "@root/publicMethods/events";
+import { updateSystemConfigs } from '@/api/systemConfig';
+import { checkUrl, checkEmail } from '@/utils/validate';
+import { initEvent } from '@root/publicMethods/events';
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: "index",
+  name: 'index',
   data() {
     return {
       sidebarOpened: true,
-      device: "desktop",
+      device: 'desktop',
       dateRateOpt: [
         {
-          value: "1",
-          label: this.$t("sysTemConfigs.perDate", { label: "1" })
+          value: '1',
+          label: this.$t('sysTemConfigs.perDate', { label: '1' }),
         },
         {
-          value: "3",
-          label: this.$t("sysTemConfigs.perDate", { label: "3" })
+          value: '3',
+          label: this.$t('sysTemConfigs.perDate', { label: '3' }),
         },
         {
-          value: "5",
-          label: this.$t("sysTemConfigs.perDate", { label: "5" })
-        }
+          value: '5',
+          label: this.$t('sysTemConfigs.perDate', { label: '5' }),
+        },
       ],
       serverOptions: [
         {
-          value: "QQ",
-          label: "QQ"
+          value: 'QQ',
+          label: 'QQ',
         },
         {
-          value: "smtp.exmail.qq.com",
-          label: "腾讯企业邮箱"
+          value: 'smtp.exmail.qq.com',
+          label: '腾讯企业邮箱',
         },
         {
-          value: "163",
-          label: "163"
-        }
+          value: '163',
+          label: '163',
+        },
       ],
       rules: {
         siteEmailServer: [
           {
             required: true,
-            message: this.$t("validate.selectNull", {
-              label: this.$t("sysTemConfigs.email_server")
+            message: this.$t('validate.selectNull', {
+              label: this.$t('sysTemConfigs.email_server'),
             }),
-            trigger: "blur"
-          }
+            trigger: 'blur',
+          },
         ],
         siteDomain: [
           {
             required: true,
-            message: this.$t("validate.selectNull", {
-              label: this.$t("sysTemConfigs.site_domain")
+            message: this.$t('validate.selectNull', {
+              label: this.$t('sysTemConfigs.site_domain'),
             }),
-            trigger: "blur"
+            trigger: 'blur',
           },
           {
             validator: (rule, value, callback) => {
               if (!checkUrl(value)) {
                 callback(
                   new Error(
-                    this.$t("validate.inputCorrect", {
-                      label: this.$t("sysTemConfigs.site_domain")
+                    this.$t('validate.inputCorrect', {
+                      label: this.$t('sysTemConfigs.site_domain'),
                     })
                   )
                 );
@@ -171,24 +249,24 @@ export default {
                 callback();
               }
             },
-            trigger: "blur"
-          }
+            trigger: 'blur',
+          },
         ],
         siteEmail: [
           {
             required: true,
-            message: this.$t("validate.inputNull", {
-              label: this.$t("sysTemConfigs.site_email")
+            message: this.$t('validate.inputNull', {
+              label: this.$t('sysTemConfigs.site_email'),
             }),
-            trigger: "blur"
+            trigger: 'blur',
           },
           {
             validator: (rule, value, callback) => {
               if (!checkEmail(value)) {
                 callback(
                   new Error(
-                    this.$t("validate.inputCorrect", {
-                      label: this.$t("sysTemConfigs.site_email")
+                    this.$t('validate.inputCorrect', {
+                      label: this.$t('sysTemConfigs.site_email'),
                     })
                   )
                 );
@@ -196,111 +274,111 @@ export default {
                 callback();
               }
             },
-            trigger: "blur"
-          }
+            trigger: 'blur',
+          },
         ],
         siteEmailPwd: [
           {
             min: 6,
             max: 100,
-            message: this.$t("validate.ranglengthandnormal", {
+            message: this.$t('validate.ranglengthandnormal', {
               min: 6,
-              max: 100
+              max: 100,
             }),
-            trigger: "blur"
-          }
+            trigger: 'blur',
+          },
         ],
         siteName: [
           {
             required: true,
-            message: this.$t("validate.inputNull", {
-              label: this.$t("sysTemConfigs.site_name")
+            message: this.$t('validate.inputNull', {
+              label: this.$t('sysTemConfigs.site_name'),
             }),
-            trigger: "blur"
+            trigger: 'blur',
           },
           {
             min: 5,
             max: 100,
-            message: this.$t("validate.ranglengthandnormal", {
+            message: this.$t('validate.ranglengthandnormal', {
               min: 5,
-              max: 100
+              max: 100,
             }),
-            trigger: "blur"
-          }
+            trigger: 'blur',
+          },
         ],
         siteDiscription: [
           {
             required: true,
-            message: this.$t("validate.inputNull", {
-              label: this.$t("sysTemConfigs.site_dis")
+            message: this.$t('validate.inputNull', {
+              label: this.$t('sysTemConfigs.site_dis'),
             }),
-            trigger: "blur"
+            trigger: 'blur',
           },
           {
             min: 5,
             max: 200,
-            message: this.$t("validate.ranglengthandnormal", {
+            message: this.$t('validate.ranglengthandnormal', {
               min: 5,
-              max: 200
+              max: 200,
             }),
-            trigger: "blur"
-          }
+            trigger: 'blur',
+          },
         ],
         siteKeywords: [
           {
             required: true,
-            message: this.$t("validate.inputNull", {
-              label: this.$t("sysTemConfigs.site_keyWords")
+            message: this.$t('validate.inputNull', {
+              label: this.$t('sysTemConfigs.site_keyWords'),
             }),
-            trigger: "blur"
+            trigger: 'blur',
           },
           {
             min: 5,
             max: 100,
-            message: this.$t("validate.ranglengthandnormal", {
+            message: this.$t('validate.ranglengthandnormal', {
               min: 5,
-              max: 100
+              max: 100,
             }),
-            trigger: "blur"
-          }
+            trigger: 'blur',
+          },
         ],
         siteAltKeywords: [
           {
             required: true,
-            message: this.$t("validate.inputNull", {
-              label: this.$t("sysTemConfigs.site_tags")
+            message: this.$t('validate.inputNull', {
+              label: this.$t('sysTemConfigs.site_tags'),
             }),
-            trigger: "blur"
+            trigger: 'blur',
           },
           {
             min: 5,
             max: 100,
-            message: this.$t("validate.ranglengthandnormal", {
+            message: this.$t('validate.ranglengthandnormal', {
               min: 5,
-              max: 100
+              max: 100,
             }),
-            trigger: "blur"
-          }
+            trigger: 'blur',
+          },
         ],
         registrationNo: [
           {
             required: true,
-            message: this.$t("validate.inputNull", {
-              label: this.$t("sysTemConfigs.site_icp")
+            message: this.$t('validate.inputNull', {
+              label: this.$t('sysTemConfigs.site_icp'),
             }),
-            trigger: "blur"
+            trigger: 'blur',
           },
           {
             min: 5,
             max: 30,
-            message: this.$t("validate.ranglengthandnormal", {
+            message: this.$t('validate.ranglengthandnormal', {
               min: 5,
-              max: 30
+              max: 30,
             }),
-            trigger: "blur"
-          }
-        ]
-      }
+            trigger: 'blur',
+          },
+        ],
+      },
     };
   },
   components: {},
@@ -310,16 +388,16 @@ export default {
       this.systemConfig.configs.siteLogo = imageUrl;
     },
     beforeLogoUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isPNG = file.type === "image/png";
-      const isGIF = file.type === "image/gif";
+      const isJPG = file.type === 'image/jpeg';
+      const isPNG = file.type === 'image/png';
+      const isGIF = file.type === 'image/gif';
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isJPG && !isPNG && !isGIF) {
-        this.$message.error(this.$t("validate.limitUploadImgType"));
+        this.$message.error(this.$t('validate.limitUploadImgType'));
       }
       if (!isLt2M) {
         this.$message.error(
-          this.$t("validate.limitUploadImgSize", { size: 2 })
+          this.$t('validate.limitUploadImgSize', { size: 2 })
         );
       }
       return (isJPG || isPNG || isGIF) && isLt2M;
@@ -334,46 +412,46 @@ export default {
       console.log(value);
     },
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
           let params = this.systemConfig.configs;
           // 更新
-          updateSystemConfigs(params).then(result => {
+          updateSystemConfigs(params).then((result) => {
             if (result.status === 200) {
-              this.$store.dispatch("getSystemConfig");
+              this.$store.dispatch('getSystemConfig');
               this.$message({
-                message: this.$t("main.updateSuccess"),
-                type: "success"
+                message: this.$t('main.updateSuccess'),
+                type: 'success',
               });
             } else {
               this.$message.error(result.message, result.message);
             }
           });
         } else {
-          console.log("error submit!!");
+          console.log('error submit!!');
           return false;
         }
       });
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-    }
+    },
   },
   computed: {
-    ...mapGetters(["systemConfig"]),
+    ...mapGetters(['systemConfig']),
     classObj() {
       return {
         hideSidebar: !this.sidebarOpened,
         openSidebar: this.sidebarOpened,
-        withoutAnimation: "false",
-        mobile: this.device === "mobile"
+        withoutAnimation: 'false',
+        mobile: this.device === 'mobile',
       };
-    }
+    },
   },
   mounted() {
     initEvent(this);
-    this.$store.dispatch("systemConfig/getSystemConfig");
-  }
+    this.$store.dispatch('systemConfig/getSystemConfig');
+  },
 };
 </script>
 

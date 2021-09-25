@@ -1,6 +1,6 @@
 {
   "name": "egg-doras-ads",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "ads",
   "eggPlugin": {
     "name": "doraAds"

@@ -489,13 +489,6 @@
             "default": "0"
           },
           {
-            "name": "categories",
-            "in": "query",
-            "description": "文档类别ID",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "tags",
             "in": "query",
             "description": "文档标签ID",

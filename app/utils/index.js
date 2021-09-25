@@ -1,9 +1,10 @@
 /*
- * @Author: doramart 
- * @Date: 2019-08-16 16:56:38 
+ * @Author: doramart
+ * @Date: 2019-08-16 16:56:38
  * @Last Modified by: doramart
- * @Last Modified time: 2020-03-10 11:33:51
+ * @Last Modified time: 2021-03-21 22:47:15
  */
+'use strict';
 exports.siteFunc = require('./siteFunc');
 exports.validators = require('./validators');
 exports.validatorUtil = require('./validatorUtil');

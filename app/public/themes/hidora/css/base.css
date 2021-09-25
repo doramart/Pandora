@@ -321,10 +321,10 @@ a.btn_more:hover { background: #16499d; color: #fff; }
 .page_title li { font-size: 16px; }
 .page_title li a { display: block; text-align: center; position: relative; color: #333; margin: 2px 0 30px 0; }
 #pagecurrent:after { content: ""; position: absolute; left: 0; top: 0; width: 4px; height: 20px; border-radius: 2px; background-color: #16499d; }
-.page-box { margin-left: 111px; padding-left: 30px; border-left: #eee 1px solid; min-height: 500px; }
-.page-box-title { margin-bottom: 30px; color: #383838; font-size: 22px; font-weight: normal; }
-.page-box .content,.page-box .content p {    font-size: 15px !important;}
-.page-box .content img { margin: inherit;}
+.pages-box { margin-left: 111px; padding-left: 30px; border-left: #eee 1px solid; min-height: 500px; }
+.pages-box-title { margin-bottom: 30px; color: #383838; font-size: 22px; font-weight: normal; }
+.pages-box .content,.pages-box .content p {    font-size: 15px !important;}
+.pages-box .content img { margin: inherit;}
 /*show-info*/
 .show-info { font-size: 14px; overflow: hidden; color: #333; padding: 30px; margin: 10px 10px 30px; border-radius: 3px; box-shadow: 0 -2px 7px rgba(0,0,0,.04), 0 4px 8px rgba(0,0,0,.06); }
 .show-info h2 { margin: 0 0 20px; font-size: 18px; }

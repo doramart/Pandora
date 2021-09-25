@@ -124,16 +124,17 @@ export default {
   },
   methods: {
     handleChangeCategory(value) {
-      debugger;
       let _this = this;
       if (value && value.length > 0) {
         let categories = this.pageInfo ? this.pageInfo.categories : "";
         this.$store.dispatch(
           "content/getContentList",
           Object.assign({}, _this.pageInfo, {
-            categories: value[value.length - 1],
+            categories: value[value.length - 1]
           })
         );
+      } else {
+        this.$store.dispatch("content/getContentList", _this.pageInfo);
       }
     },
     addContent() {

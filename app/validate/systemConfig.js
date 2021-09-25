@@ -1,70 +1,71 @@
 /*
- * @Author: doramart 
- * @Date: 2019-08-15 10:52:18 
+ * @Author: doramart
+ * @Date: 2019-08-15 10:52:18
  * @Last Modified by: doramart
- * @Last Modified time: 2020-11-07 21:24:35
+ * @Last Modified time: 2021-04-05 18:31:24
  */
 
-
+'use strict';
 const form = (ctx) => {
-    return {
-        siteEmailServer: {
-            type: "string",
-            required: true,
-            message: "invite email server"
-        },
-        siteEmail: {
-            type: "email",
-            required: true,
-            message: ctx.__("validate_inputCorrect", [ctx.__("label_user_email")])
-        },
-        siteName: {
-            type: "string",
-            required: true,
-            min: 5,
-            max: 100,
-            message: ctx.__("validate_inputCorrect", [ctx.__("label_sysconfig_site_name")])
-        },
-        siteDiscription: {
-            type: "string",
-            required: true,
-            min: 5,
-            max: 200,
-            message: ctx.__("validate_inputCorrect", [ctx.__("label_sysconfig_site_dis")])
-        },
-        siteKeywords: {
-            type: "string",
-            required: true,
-            min: 5,
-            max: 100,
-            message: ctx.__("validate_inputCorrect", [ctx.__("label_sysconfig_site_keyWords")])
-        },
-        siteAltKeywords: {
-            type: "string",
-            required: true,
-            min: 5,
-            max: 100,
-            message: ctx.__("validate_inputCorrect", [ctx.__("label_sysconfig_site_tags")])
-        },
-        registrationNo: {
-            type: "string",
-            required: true,
-            min: 5,
-            max: 30,
-            message: ctx.__("validate_inputCorrect", [ctx.__("label_sysconfig_site_icp")])
-        },
-        databackForderPath: {
-            type: "string",
-            required: true,
-            min: 5,
-            max: 300,
-            message: ctx.__("validate_inputCorrect", [ctx.__("label_sysconfig_databakPath")])
-        }
-    }
-}
-
-
+  return {
+    siteEmailServer: {
+      type: 'string',
+      required: true,
+      message: 'invite email server',
+    },
+    siteEmail: {
+      type: 'email',
+      required: true,
+      message: ctx.__('validate_inputCorrect', [ctx.__('label_user_email')]),
+    },
+    siteName: {
+      type: 'string',
+      required: true,
+      min: 5,
+      max: 100,
+      message: ctx.__('validate_inputCorrect', [
+        ctx.__('label_sysconfig_site_name'),
+      ]),
+    },
+    siteDiscription: {
+      type: 'string',
+      required: true,
+      min: 5,
+      max: 200,
+      message: ctx.__('validate_inputCorrect', [
+        ctx.__('label_sysconfig_site_dis'),
+      ]),
+    },
+    siteKeywords: {
+      type: 'string',
+      required: true,
+      min: 5,
+      max: 100,
+      message: ctx.__('validate_inputCorrect', [
+        ctx.__('label_sysconfig_site_keyWords'),
+      ]),
+    },
+    siteAltKeywords: {
+      type: 'string',
+      required: true,
+      min: 5,
+      max: 100,
+      message: ctx.__('validate_inputCorrect', [
+        ctx.__('label_sysconfig_site_tags'),
+      ]),
+    },
+    registrationNo: {
+      type: 'string',
+      required: true,
+      min: 5,
+      max: 30,
+      message: ctx.__('validate_inputCorrect', [
+        ctx.__('label_sysconfig_site_icp'),
+      ]),
+    },
+  };
+};
 
 module.exports = {
-    form
+  form,
 };

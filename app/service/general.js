@@ -1,51 +1,50 @@
 /*
- * @Author: doramart 
- * @Date: 2019-06-21 11:14:02 
+ * @Author: doramart
+ * @Date: 2019-06-21 11:14:02
  * @Last Modified by: doramart
- * @Last Modified time: 2020-11-07 23:50:46
+ * @Last Modified time: 2021-03-22 22:41:12
  */
-
+'use strict';
 const _ = require('lodash');
 
 // 关键操作记录日志
 const _addActionUserInfo = (ctx, params = {}) => {
+  let infoStr = '';
 
-    let infoStr = '';
+  if (!_.isEmpty(ctx.session.adminUserInfo)) {
+    infoStr += 'actionUser: ' + JSON.stringify(ctx.session.adminUserInfo) + ',';
+  }
 
-    if (!_.isEmpty(ctx.session.adminUserInfo)) {
-        infoStr += 'actionUser: ' + JSON.stringify(ctx.session.adminUserInfo) + ',';
-    }
+  if (!_.isEmpty(params)) {
+    infoStr += 'actionParams: ' + JSON.stringify(params) + ',';
+  }
 
-    if (!_.isEmpty(params)) {
-        infoStr += 'actionParams: ' + JSON.stringify(params) + ',';
-    }
-
-    return infoStr;
-}
+  return infoStr;
+};
 
 const _renderinclude = (ctx, baseSql, include) => {
-    if (include && include != 'none') {
-        baseSql.include = [];
-        for (const popItem of include) {
-            let includeItem = {};
-            if (typeof popItem === 'object') {
-                if (popItem.model && ctx.model[popItem.model]) {
-                    includeItem = popItem;
-                    includeItem.model = ctx.model[popItem.model];
-                    // popItem.path && (includeItem.as = popItem.path);
-                    // popItem.select && (includeItem.attributes = (popItem.select).split(/[ ]+/));
-                    // popItem.where && (includeItem.where = popItem.where);
-                }
-            } else {
-                popItem && (includeItem.model = ctx.model[popItem])
-            }
-            if (!_.isEmpty(includeItem)) {
-                baseSql.include.push(includeItem);
-            }
+  if (include && include !== 'none') {
+    baseSql.include = [];
+    for (const popItem of include) {
+      let includeItem = {};
+      if (typeof popItem === 'object') {
+        if (popItem.model && ctx.model[popItem.model]) {
+          includeItem = popItem;
+          includeItem.model = ctx.model[popItem.model];
+          // popItem.path && (includeItem.as = popItem.path);
+          // popItem.select && (includeItem.attributes = (popItem.select).split(/[ ]+/));
+          // popItem.where && (includeItem.where = popItem.where);
         }
+      } else {
+        popItem && (includeItem.model = ctx.model[popItem]);
+      }
+      if (!_.isEmpty(includeItem)) {
+        baseSql.include.push(includeItem);
+      }
     }
-    return baseSql;
-}
+  }
+  return baseSql;
+};
 
 /**
  * 通用列表
@@ -57,145 +56,122 @@ const _renderinclude = (ctx, baseSql, include) => {
  * @return {[type]}         [description]
  */
 
-
-exports._list = async ({
-    ctx,
-    app
-}, Model, payload, {
+exports._list = async (
+  { ctx, app },
+  Model,
+  payload = {},
+  {
     sort = [],
     attributes = null,
     query = {},
     searchKeys = [],
     searchParams = {},
-    include = []
-} = {}) => {
+    include = [],
+  } = {}
+) => {
+  let { current, pageSize, searchkey, isPaging, skip, lean } = payload;
 
+  let count = 0;
+  query = query || {};
+  // eslint-disable-next-line no-sequences
+  (current = current || 1), (pageSize = Number(pageSize) || 10);
+  isPaging = isPaging !== '0';
+  lean = lean === '1';
+  const skipNum = skip ? skip : (Number(current) - 1) * Number(pageSize);
+  const sortObj = !_.isEmpty(sort) ? sort : [['created_at', 'desc']];
 
-    let {
-        current,
-        pageSize,
-        searchkey,
-        isPaging,
-        skip,
-        lean
-    } = payload;
+  // console.log('-----sortObj----', sortObj)
 
-    let documents;
-    let count = 0;
-    query = query || {};
-    current = current || 1, pageSize = Number(pageSize) || 10;
-    isPaging = isPaging == '0' ? false : true;
-    lean = lean == '1' ? true : false;
-    let skipNum = skip ? skip : ((Number(current)) - 1) * Number(pageSize);
-    let sortObj = !_.isEmpty(sort) ? sort : [
-        ['created_at', 'desc']
-    ];
-
-    // console.log('-----sortObj----', sortObj)
-
-    if (searchkey) {
-        if (searchKeys) {
-            if (typeof searchKeys == 'object' && searchKeys.length > 0) {
-                let searchStr = [];
-                for (let i = 0; i < searchKeys.length; i++) {
-                    const keyItem = searchKeys[i];
-                    searchStr.push({
-                        [keyItem]: {
-                            [app.Sequelize.Op.like]: `%${searchkey}%`
-                        }
-                    })
-                }
-                query[app.Sequelize.Op.or] = searchStr;
-            } else {
-                query[searchKeys] = {
-                    [app.Sequelize.Op.like]: `%${searchkey}%`
-                }
-            }
+  if (searchkey) {
+    if (searchKeys) {
+      if (typeof searchKeys === 'object' && searchKeys.length > 0) {
+        const searchStr = [];
+        for (let i = 0; i < searchKeys.length; i++) {
+          const keyItem = searchKeys[i];
+          searchStr.push({
+            [keyItem]: {
+              [app.Sequelize.Op.like]: `%${searchkey}%`,
+            },
+          });
         }
-    }
-
-    let baseSql = {
-        distinct: true,
-        where: query,
-        offset: skipNum,
-        order: sortObj
-    };
-
-    if (attributes) {
-        baseSql.attributes = attributes;
-    }
-
-    if (!_.isEmpty(include) && include != 'none') {
-        baseSql = _renderinclude(ctx, baseSql, include);
-    }
-
-    if (isPaging) {
-        baseSql.limit = Number(pageSize);
-    } else {
-        if (payload.pageSize > 0) {
-            baseSql.limit = Number(pageSize);
-        }
-    }
-
-    if (lean) {
-        baseSql.raw = true;
-    }
-
-    documents = await Model.findAndCountAll(baseSql)
-    count = documents.count;
-
-    // console.log('--count--', count)
-
-    if (isPaging) {
-
-        let pageInfoParams = {
-            totalItems: count,
-            pageSize: Number(pageSize),
-            current: Number(current),
-            searchkey: searchkey || '',
-            totalPage: Math.ceil(count / Number(pageSize)),
-
+        query[app.Sequelize.Op.or] = searchStr;
+      } else {
+        query[searchKeys] = {
+          [app.Sequelize.Op.like]: `%${searchkey}%`,
         };
-        for (const querykey in searchParams) {
-            if (searchParams.hasOwnProperty(querykey)) {
-                const queryValue = searchParams[querykey];
-                if (typeof queryValue != 'object') {
-                    _.assign(pageInfoParams, {
-                        [querykey]: queryValue || ''
-                    });
-                }
-            }
+      }
+    }
+  }
+
+  let baseSql = {
+    distinct: true,
+    where: query,
+    offset: skipNum,
+    order: sortObj,
+  };
+
+  if (attributes) {
+    baseSql.attributes = attributes;
+  }
+
+  if (!_.isEmpty(include) && include !== 'none') {
+    baseSql = _renderinclude(ctx, baseSql, include);
+  }
+
+  if (isPaging) {
+    baseSql.limit = Number(pageSize);
+  } else {
+    if (payload.pageSize > 0) {
+      baseSql.limit = Number(pageSize);
+    }
+  }
+
+  if (lean) {
+    baseSql.raw = true;
+  }
+
+  const documents = await Model.findAndCountAll(baseSql);
+  count = documents.count;
+
+  // console.log('--count--', count)
+
+  if (isPaging) {
+    const pageInfoParams = {
+      totalItems: count,
+      pageSize: Number(pageSize),
+      current: Number(current),
+      searchkey: searchkey || '',
+      totalPage: Math.ceil(count / Number(pageSize)),
+    };
+    for (const querykey in searchParams) {
+      if (searchParams.hasOwnProperty(querykey)) {
+        const queryValue = searchParams[querykey];
+        if (typeof queryValue !== 'object') {
+          _.assign(pageInfoParams, {
+            [querykey]: queryValue || '',
+          });
         }
-
-        return {
-
-            docs: documents.rows,
-            pageInfo: pageInfoParams
-
-        }
-    } else {
-        return documents.rows;
+      }
     }
 
-}
+    return {
+      docs: documents.rows,
+      pageInfo: pageInfoParams,
+    };
+  }
+  return documents.rows;
+};
 
+exports._count = async (_, Model, query = {}) => {
+  return await Model.count({
+    where: query,
+  });
+};
 
-exports._count = async ({
-    ctx,
-    app
-}, Model, query = {}) => {
-    return await Model.count({
-        where: query
-    });
-}
-
-exports._create = async ({
-    ctx,
-    app
-}, Model, payload) => {
-    payload.id = 0;
-    return await Model.create(payload);
-}
+exports._create = async (_, Model, payload) => {
+  payload.id = 0;
+  return await Model.create(payload);
+};
 
 /**
  * 通用单个
@@ -205,30 +181,25 @@ exports._create = async ({
  * @return {[type]}         [description]
  */
 
-exports._item = async ({
-    ctx,
-    app
-}, Model, {
-    attributes = null,
-    query = {},
-    include = []
-} = {}) => {
+exports._item = async (
+  { ctx },
+  Model,
+  { attributes = null, query = {}, include = [] } = {}
+) => {
+  let baseSql = {
+    where: query,
+  };
 
-    let baseSql = {
-        where: query,
-    }
+  if (attributes) {
+    baseSql.attributes = attributes;
+  }
 
-    if (attributes) {
-        baseSql.attributes = attributes;
-    }
+  if (include && include !== 'none') {
+    baseSql = _renderinclude(ctx, baseSql, include);
+  }
 
-    if (include && include != 'none') {
-        baseSql = _renderinclude(ctx, baseSql, include);
-    }
-
-    return await Model.findOne(baseSql);
-
-}
+  return await Model.findOne(baseSql);
+};
 
 /**
  * 通用删除
@@ -237,31 +208,28 @@ exports._item = async ({
  * @param  {[type]}   ids [description]
  */
 
-exports._removes = async ({
-    ctx,
-    app
-}, Model, ids, key) => {
+exports._removes = async ({ ctx, app }, Model, ids, key) => {
+  if (!checkCurrentId(ids)) {
+    throw new Error(ctx.__('validate_error_params'));
+  } else {
+    ids = ids.toString().split(',');
+  }
 
-    if (!checkCurrentId(ids)) {
-        throw new Error(ctx.__("validate_error_params"));
-    } else {
-        ids = ids.toString().split(',');
-    }
-
-    ctx.logger.warn(_addActionUserInfo(ctx, {
-        ids,
-        key
-    }));
-
-    return await Model.destroy({
-        where: {
-            [key]: {
-                [app.Sequelize.Op.in]: ids
-            }
-        }
+  ctx.logger.warn(
+    _addActionUserInfo(ctx, {
+      ids,
+      key,
     })
+  );
 
-}
+  return await Model.destroy({
+    where: {
+      [key]: {
+        [app.Sequelize.Op.in]: ids,
+      },
+    },
+  });
+};
 
 /**
  * 通用删除
@@ -269,17 +237,12 @@ exports._removes = async ({
  * @param  {[type]}   Model [description]
  */
 
-exports._removeAll = async ({
-    ctx,
-    app
-}, Model) => {
-
-    return await Model.destroy({
-        where: {},
-        truncate: true
-    })
-
-}
+exports._removeAll = async (_, Model) => {
+  return await Model.destroy({
+    where: {},
+    truncate: true,
+  });
+};
 
 /**
  * 通用删除
@@ -288,34 +251,29 @@ exports._removeAll = async ({
  * @param  {[type]}   ids [description]
  */
 
-exports._safeDelete = async ({
-    ctx,
-    app
-}, Model, ids, updateObj = {}) => {
+exports._safeDelete = async ({ ctx, app }, Model, ids, updateObj = {}) => {
+  if (!checkCurrentId(ids)) {
+    throw new Error(ctx.__('validate_error_params'));
+  } else {
+    ids = ids.split(',');
+  }
 
-    if (!checkCurrentId(ids)) {
-        throw new Error(ctx.__("validate_error_params"));
-    } else {
-        ids = ids.split(',');
-    }
+  let queryObj = {
+    state: '0',
+  };
 
-    let queryObj = {
-        state: '0'
-    };
+  if (!_.isEmpty(updateObj)) {
+    queryObj = updateObj;
+  }
 
-    if (!_.isEmpty(updateObj)) {
-        queryObj = updateObj;
-    }
-
-    return await Model.update(queryObj, {
-        where: {
-            id: {
-                [app.Sequelize.Op.in]: ids
-            }
-        }
-    })
-
-}
+  return await Model.update(queryObj, {
+    where: {
+      id: {
+        [app.Sequelize.Op.in]: ids,
+      },
+    },
+  });
+};
 
 /**
  * 通用编辑
@@ -325,37 +283,38 @@ exports._safeDelete = async ({
  * @param  {[type]} data    [description]
  */
 
-exports._update = async ({
-    ctx,
-    app
-}, Model, id, data, query = {}) => {
-
-    if (typeof id === 'number') {
-        query = _.assign({}, query, {
-            id: id
-        });
-    } else {
-        if (_.isEmpty(query)) {
-            throw new Error(ctx.__('validate_error_params'));
-        }
-    }
-
-    const user = await this._item({
-        ctx,
-        app
-    }, Model, {
-        query: query
-    })
-
-    if (_.isEmpty(user)) {
-        throw new Error(ctx.__('validate_error_params'));
-    }
-
-    return await Model.update(data, {
-        where: query
+exports._update = async ({ ctx, app }, Model, id, data, query = {}) => {
+  if (typeof id === 'number') {
+    query = _.assign({}, query, {
+      id,
     });
+  } else {
+    if (_.isEmpty(query)) {
+      throw new Error(ctx.__('validate_error_params'));
+    }
+  }
 
-}
+  const targetItem = await this._item(
+    {
+      ctx,
+      app,
+    },
+    Model,
+    {
+      query,
+    }
+  );
+
+  if (_.isEmpty(targetItem)) {
+    throw new Error(ctx.__('validate_error_params'));
+  } else {
+    Object.assign(data, { updatedAt: new Date() });
+  }
+
+  return await Model.update(data, {
+    where: query,
+  });
+};
 
 /**
  * 通用编辑
@@ -365,33 +324,34 @@ exports._update = async ({
  * @param  {[type]} data    [description]
  */
 
-exports._updateMany = async ({
-    ctx,
-    app
-}, Model, ids = '', data, query = {}) => {
+exports._updateMany = async (
+  { ctx, app },
+  Model,
+  ids = '',
+  data,
+  query = {}
+) => {
+  if (_.isEmpty(ids) && _.isEmpty(query)) {
+    throw new Error(ctx.__('validate_error_params'));
+  }
 
-    if (_.isEmpty(ids) && _.isEmpty(query)) {
-        throw new Error(ctx.__('validate_error_params'));
+  if (!_.isEmpty(ids)) {
+    if (!checkCurrentId(ids)) {
+      throw new Error(ctx.__('validate_error_params'));
+    } else {
+      ids = ids.split(',');
     }
-
-    if (!_.isEmpty(ids)) {
-        if (!checkCurrentId(ids)) {
-            throw new Error(ctx.__("validate_error_params"));
-        } else {
-            ids = ids.split(',');
-        }
-        query = _.assign({}, query, {
-            id: {
-                [app.Sequelize.Op.in]: ids
-            }
-        });
-    }
-
-    return await Model.update(data, {
-        where: query
+    query = _.assign({}, query, {
+      id: {
+        [app.Sequelize.Op.in]: ids,
+      },
     });
+  }
 
-}
+  return await Model.update(data, {
+    where: query,
+  });
+};
 
 /**
  * 通用数组字段添加
@@ -402,23 +362,20 @@ exports._updateMany = async ({
  */
 
 exports._addToSet = async (ctx, Model, id, data, query = {}) => {
+  if (_.isEmpty(id) && _.isEmpty(query)) {
+    throw new Error(ctx.__('validate_error_params'));
+  }
 
-    if (_.isEmpty(id) && _.isEmpty(query)) {
-        throw new Error(ctx.__('validate_error_params'));
-    }
-
-    if (!_.isEmpty(id)) {
-        query = _.assign({}, query, {
-            id: id
-        });
-    }
-
-    return await Model.update(query, {
-        $addToSet: data
+  if (!_.isEmpty(id)) {
+    query = _.assign({}, query, {
+      id,
     });
+  }
 
-}
-
+  return await Model.update(query, {
+    $addToSet: data,
+  });
+};
 
 /**
  * 通用数组字段删除
@@ -428,26 +385,21 @@ exports._addToSet = async (ctx, Model, id, data, query = {}) => {
  * @param  {[type]} data    [description]
  */
 
-exports._pull = async ({
-    ctx,
-    app
-}, Model, id, data, query = {}) => {
+exports._pull = async ({ ctx }, Model, id, data, query = {}) => {
+  if (_.isEmpty(id) && _.isEmpty(query)) {
+    throw new Error(ctx.__('validate_error_params'));
+  }
 
-    if (_.isEmpty(id) && _.isEmpty(query)) {
-        throw new Error(ctx.__('validate_error_params'));
-    }
-
-    if (!_.isEmpty(id)) {
-        query = _.assign({}, query, {
-            id: id
-        });
-    }
-
-    return await Model.update(query, {
-        $pull: data
+  if (!_.isEmpty(id)) {
+    query = _.assign({}, query, {
+      id,
     });
+  }
 
-}
+  return await Model.update(query, {
+    $pull: data,
+  });
+};
 
 /**
  * 通用属性加值
@@ -457,35 +409,36 @@ exports._pull = async ({
  * @param  {[type]} data    [description]
  */
 
-exports._inc = async ({
-    ctx,
-    app
-}, Model, id, data, {
-    query = {}
-} = {}) => {
+exports._inc = async ({ ctx }, Model, id, data, { query = {} } = {}) => {
+  if (!id && _.isEmpty(query)) {
+    throw new Error(ctx.__('validate_error_params'));
+  }
 
-    if (_.isEmpty(id) && _.isEmpty(query)) {
-        throw new Error(ctx.__('validate_error_params'));
+  if (id) {
+    query = _.assign(
+      {},
+      {
+        id,
+      },
+      query
+    );
+  }
+
+  Model.findOne({
+    where: query,
+  }).then(function (item) {
+    for (const attr in data) {
+      if (data.hasOwnProperty(attr)) {
+        const attrValue = data[attr];
+        !_.isEmpty(item) &&
+          item
+            .increment([attr], {
+              by: Number(attrValue),
+            })
+            .then(function () {
+              console.log('success');
+            });
+      }
     }
-
-    if (!_.isEmpty(id)) {
-        query = _.assign({}, {
-            id: id
-        }, query);
-    }
-
-    Model.findOne({
-        where: query
-    }).then(function (item) {
-        for (const attr in data) {
-            if (data.hasOwnProperty(attr)) {
-                const attrValue = data[attr];
-                !_.isEmpty(item) && item.increment([attr], {
-                    by: Number(attrValue)
-                }).then(function (item) {
-                    console.log('success');
-                })
-            }
-        }
-    })
-}
+  });
+};

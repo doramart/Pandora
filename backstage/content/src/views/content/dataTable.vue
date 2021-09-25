@@ -70,8 +70,8 @@
         width="120"
       >
         <template slot-scope="scope">
-          <span v-if="scope.row.categories && scope.row.categories[0] && scope.row.categories[0].parentId != '0'">{{scope.row.categories[0].name}}</span>
-          <span v-if="scope.row.categories && scope.row.categories[1] && scope.row.categories[1].parentId != '0'">{{scope.row.categories[1].name}}</span>
+          <span v-if="scope.row.categories && scope.row.categories[0] && scope.row.categories[0].parentId !== 0">{{scope.row.categories[0].name}}</span>
+          <span v-if="scope.row.categories && scope.row.categories[1] && scope.row.categories[1].parentId !== 0">{{scope.row.categories[1].name}}</span>
         </template>
       </el-table-column>
 

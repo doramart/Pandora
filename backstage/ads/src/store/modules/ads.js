@@ -1,13 +1,10 @@
 import * as types from '../types.js';
-import {
-  getAdsList,
-} from '@/api/ads';
-import _ from 'lodash';
+import { getAdsList } from '@/api/ads';
 
 const state = {
   list: {
     pageInfo: {},
-    docs: []
+    docs: [],
   },
   infoFormState: {
     edit: false,
@@ -18,8 +15,8 @@ const state = {
       comments: '',
       items: [],
       state: true,
-      carousel: true
-    }
+      carousel: true,
+    },
   },
   itemFormState: {
     show: false,
@@ -32,83 +29,82 @@ const state = {
       width: '',
       height: '',
       alt: '',
-      sImg: ''
-    }
-  }
-}
+      sImg: '',
+    },
+  },
+};
 
 const mutations = {
   [types.ADS_LIST](state, list) {
-    state.list = list
+    state.list = list;
   },
   [types.ADS_INFO_FORMSTATE](state, formState) {
     state.infoFormState.edit = formState.edit;
-    state.infoFormState.formData = Object.assign({
-      name: '',
-      ads_type: '1',
-      height: '',
-      comments: '',
-      items: [],
-      state: true,
-      carousel: true
-    }, formState.formData);
+    state.infoFormState.formData = Object.assign(
+      {
+        name: '',
+        ads_type: '1',
+        height: '',
+        comments: '',
+        items: [],
+        state: true,
+        carousel: true,
+      },
+      formState.formData
+    );
   },
   [types.ADS_ITEM_FORMSTATE](state, formState) {
     state.itemFormState.edit = formState.edit;
     state.itemFormState.show = formState.show;
-    state.itemFormState.formData = Object.assign({
-      title: '',
-      link: '',
-      width: '',
-      height: '',
-      alt: '',
-      sImg: '',
-    }, formState.formData);
+    state.itemFormState.formData = Object.assign(
+      {
+        title: '',
+        link: '',
+        width: '',
+        height: '',
+        alt: '',
+        sImg: '',
+      },
+      formState.formData
+    );
   },
-}
+};
 
 const actions = {
-
-  getAdsList({
-    commit
-  }, params = {}) {
+  getAdsList({ commit }, params = {}) {
     getAdsList(params).then((result) => {
-      commit(types.ADS_LIST, result.data)
-    })
+      commit(types.ADS_LIST, result.data);
+    });
   },
-  adsInfoForm: ({
-    commit
-  }, params = {}) => {
+  adsInfoForm: ({ commit }, params = {}) => {
     commit(types.ADS_INFO_FORMSTATE, {
       edit: params.edit,
-      formData: params.formData
-    })
+      formData: params.formData,
+    });
   },
-  showAdsItemForm: ({
-    commit
-  }, params = {
-    edit: false,
-    formData: {}
-  }) => {
+  showAdsItemForm: (
+    { commit },
+    params = {
+      edit: false,
+      formData: {},
+    }
+  ) => {
     commit(types.ADS_ITEM_FORMSTATE, {
       show: true,
       edit: params.edit,
-      formData: params.formData
-    })
+      formData: params.formData,
+    });
   },
-  hideAdsItemForm: ({
-    commit
-  }) => {
+  hideAdsItemForm: ({ commit }) => {
     commit(types.ADS_ITEM_FORMSTATE, {
-      show: false
-    })
+      show: false,
+    });
   },
-
-}
+};
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
-}
+  actions,
+};

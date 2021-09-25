@@ -1,9 +1,8 @@
 import request from '@root/publicMethods/request';
 
-
-export function getInfo(token) {
+export function getInfo() {
   return request({
     url: '/manage/getUserSession',
-    method: 'get'
-  })
+    method: 'get',
+  });
 }

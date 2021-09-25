@@ -15,22 +15,21 @@ export default {
     device: String,
     pageInfo: Object,
     type: String,
-    ids: Array
+    ids: Array,
   },
   data() {
     return {
       selectUserList: [],
-      searchkey: ""
+      searchkey: '',
     };
   },
   methods: {
     addRole() {
-      this.$store.dispatch("adminGroup/showAdminGroupForm");
+      this.$store.dispatch('adminGroup/showAdminGroupForm');
     },
     // TOPBARLEFTOPTION
   },
-  components: {}
+  components: {},
 };
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

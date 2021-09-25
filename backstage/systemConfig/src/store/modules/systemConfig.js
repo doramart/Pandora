@@ -21,27 +21,32 @@ const state = {
     databackForderPath: '',
     bakDataRate: '1',
     statisticalCode: '',
-    bakDatabyTime: false
-  }
-}
+    editorType: '1',
+    bakDatabyTime: false,
+  },
+};
 
 const mutations = {
   [types.SYSTEMCONFIG_CONFIGLIST](state, config) {
-    state.configs = Object.assign({
-      siteName: '',
-      ogTitle: '',
-      siteDomain: '',
-      siteDiscription: '',
-      siteKeywords: '',
-      siteEmailServer: '',
-      siteEmail: '',
-      siteEmailPwd: '',
-      mongoDBPath: '',
-      databackForderPath: '',
-      bakDataRate: '1',
-      statisticalCode: '',
-      bakDatabyTime: false
-    }, config)
+    state.configs = Object.assign(
+      {
+        siteName: '',
+        ogTitle: '',
+        siteDomain: '',
+        siteDiscription: '',
+        siteKeywords: '',
+        siteEmailServer: '',
+        siteEmail: '',
+        siteEmailPwd: '',
+        mongoDBPath: '',
+        databackForderPath: '',
+        bakDataRate: '1',
+        statisticalCode: '',
+        editorType: '1',
+        bakDatabyTime: false,
+      },
+      config
+    );
   },
 }
 

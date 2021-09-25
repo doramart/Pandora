@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import getters from './getters'
-import ads from './modules/ads'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import getters from './getters';
+import ads from './modules/ads';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
     ads,
   },
-  getters
-})
+  getters,
+});
 
-export default store
+export default store;

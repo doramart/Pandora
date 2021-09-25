@@ -1,17 +1,17 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import getters from './getters'
-import adminUser from './modules/adminUser'
-import adminGroup from './modules/adminGroup'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import getters from './getters';
+import adminUser from './modules/adminUser';
+import adminGroup from './modules/adminGroup';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
     adminUser,
-    adminGroup
+    adminGroup,
   },
-  getters
-})
+  getters,
+});
 
-export default store
+export default store;

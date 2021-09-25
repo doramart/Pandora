@@ -1,7 +1,5 @@
 import * as types from '../types.js';
-import {
-  adminUserList,
-} from '@/api/adminUser';
+import { adminUserList } from '@/api/adminUser';
 import _ from 'lodash';
 
 const state = {
@@ -18,20 +16,20 @@ const state = {
       comments: '',
       phoneNum: '',
       countryCode: '',
-    }
+    },
   },
   userList: {
     pageInfo: {},
-    docs: []
+    docs: [],
   },
-}
+};
 
 const mutations = {
   [types.ADMINUSERFORMSTATE](state, formState) {
     state.formState.show = formState.show;
     state.formState.edit = formState.edit;
     if (!_.isEmpty(formState.formData)) {
-      state.formState.formData = formState.formData
+      state.formState.formData = formState.formData;
     } else {
       state.formState.formData = {
         name: '',
@@ -43,49 +41,43 @@ const mutations = {
         comments: '',
         phoneNum: '',
         countryCode: '',
-      }
+      };
     }
-
   },
   [types.ADMINUSERLIST](state, userlist) {
-    state.userList = userlist
+    state.userList = userlist;
   },
-}
+};
 
 const actions = {
-
-  showAdminUserForm: ({
-    commit
-  }, params = {
-    edit: false,
-    formData: {}
-  }) => {
+  showAdminUserForm: (
+    { commit },
+    params = {
+      edit: false,
+      formData: {},
+    }
+  ) => {
     commit(types.ADMINUSERFORMSTATE, {
       show: true,
       edit: params.edit,
-      formData: params.formData
-    })
+      formData: params.formData,
+    });
   },
-  hideAdminUserForm: ({
-    commit
-  }) => {
+  hideAdminUserForm: ({ commit }) => {
     commit(types.ADMINUSERFORMSTATE, {
-      show: false
-    })
+      show: false,
+    });
   },
-  getAdminUserList({
-    commit
-  }, params = {}) {
+  getAdminUserList({ commit }, params = {}) {
     adminUserList(params).then((result) => {
-      commit(types.ADMINUSERLIST, result.data)
-    })
+      commit(types.ADMINUSERLIST, result.data);
+    });
   },
-
-}
+};
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
-}
+  actions,
+};

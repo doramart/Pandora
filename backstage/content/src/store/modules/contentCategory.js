@@ -1,44 +1,34 @@
 import * as types from '../types.js';
-import {
-  contentCategoryList
-} from '@/api/contentCategory';
-import _ from 'lodash';
-import {
-  renderTreeData
-} from '@/utils';
-
+import { contentCategoryList } from '@/api/contentCategory';
+import { renderTreeData } from '@/utils';
 
 const state = {
   categoryList: {
     pageInfo: {},
-    docs: []
+    docs: [],
   },
-}
+};
 
 const mutations = {
   [types.CONTENTCATEGORYS_LIST](state, categoryList) {
-    state.categoryList = categoryList
+    state.categoryList = categoryList;
   },
-}
+};
 
 const actions = {
-
-  getContentCategoryList({
-    commit
-  }, params = {}) {
+  getContentCategoryList({ commit }, params = {}) {
     contentCategoryList(params).then((result) => {
-      let treeData = renderTreeData({
-        docs: result.data
+      const treeData = renderTreeData({
+        docs: result.data,
       });
-      commit(types.CONTENTCATEGORYS_LIST, treeData)
-    })
+      commit(types.CONTENTCATEGORYS_LIST, treeData);
+    });
   },
-
-}
+};
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
-}
+  actions,
+};

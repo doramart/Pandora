@@ -9,9 +9,11 @@ run/
 *.swp
 *.vscode
 package-lock.json
+app/public/upload
 app/ext
 app/controller/ext
-
+databak/
+dist/*
 
 
 

@@ -1,6 +1,6 @@
 {
   "name": "egg-doras-content",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "description": "content",
   "eggPlugin": {
     "name": "doraContent"
@@ -11,17 +11,18 @@
     "egg-plugin"
   ],
   "dependencies": {
-    "stream-wormhole": "^1.1.0",
     "await-stream-ready": "^1.0.1",
-    "mammoth": "^1.4.9",
-    "moment": "^2.24.0",
-    "lodash": "^4.17.15",
-    "xss": "^1.0.6",
-    "qr-image": "^3.2.0",
-    "validator": "^11.1.0",
-    "egg-doras-reguser": "^1.0.0",
     "egg-doras-contentcategory": "^1.0.0",
-    "egg-doras-contenttags": "^1.0.0"
+    "egg-doras-contenttags": "^1.0.0",
+    "egg-doras-reguser": "^1.0.0",
+    "lodash": "^4.17.15",
+    "mammoth": "^1.4.9",
+    "marked": "^2.0.1",
+    "moment": "^2.24.0",
+    "qr-image": "^3.2.0",
+    "stream-wormhole": "^1.1.0",
+    "validator": "^11.1.0",
+    "xss": "^1.0.6"
   },
   "devDependencies": {
     "autod": "^3.0.1",

@@ -9,8 +9,16 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="name" :label="$t('adminGroup.lb_group_name')" width="120"></el-table-column>
-      <el-table-column prop="comments" :label="$t('adminGroup.lb_group_dis')" show-overflow-tooltip></el-table-column>
+      <el-table-column
+        prop="name"
+        :label="$t('adminGroup.lb_group_name')"
+        width="120"
+      ></el-table-column>
+      <el-table-column
+        prop="comments"
+        :label="$t('adminGroup.lb_group_dis')"
+        show-overflow-tooltip
+      ></el-table-column>
       <el-table-column :label="$t('main.dataTableOptions')" width="200">
         <template slot-scope="scope">
           <el-button
@@ -48,8 +56,7 @@
 </template>
 
 <script>
-import _ from "lodash";
-import { getOneAdminGroup, deleteAdminGroup } from "@/api/adminGroup";
+import { getOneAdminGroup, deleteAdminGroup } from '@/api/adminGroup';
 export default {
   props: {
     dataList: Array,
@@ -76,7 +83,7 @@ export default {
       getOneAdminGroup({ id: rowData._id })
         .then((result) => {
           if (result.status === 200) {
-            this.$store.dispatch("adminGroup/showAdminGroupForm", {
+            this.$store.dispatch('adminGroup/showAdminGroupForm', {
               edit: true,
               formData: result.data,
             });
@@ -86,8 +93,8 @@ export default {
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: this.$t("main.scr_modal_del_error_info"),
+            type: 'info',
+            message: this.$t('main.scr_modal_del_error_info'),
           });
         });
     },
@@ -97,9 +104,9 @@ export default {
         .then((result) => {
           if (result.status === 200) {
             if (result.data && result.data.power) {
-              result.data.power = result.data.power.split(",");
+              result.data.power = result.data.power.split(',');
             }
-            this.$store.dispatch("adminGroup/showAdminGroupRoleForm", {
+            this.$store.dispatch('adminGroup/showAdminGroupRoleForm', {
               edit: true,
               formData: result.data,
             });
@@ -109,19 +116,19 @@ export default {
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: this.$t("main.scr_modal_del_error_info"),
+            type: 'info',
+            message: this.$t('main.scr_modal_del_error_info'),
           });
         });
     },
     deleteRole(index, rows) {
       this.$confirm(
-        this.$t("main.del_notice"),
-        this.$t("main.scr_modal_title"),
+        this.$t('main.del_notice'),
+        this.$t('main.scr_modal_title'),
         {
-          confirmButtonText: this.$t("main.confirmBtnText"),
-          cancelButtonText: this.$t("main.cancelBtnText"),
-          type: "warning",
+          confirmButtonText: this.$t('main.confirmBtnText'),
+          cancelButtonText: this.$t('main.cancelBtnText'),
+          type: 'warning',
         }
       )
         .then(() => {
@@ -131,10 +138,10 @@ export default {
         })
         .then((result) => {
           if (result.status === 200) {
-            this.$store.dispatch("adminGroup/getAdminGroupList");
+            this.$store.dispatch('adminGroup/getAdminGroupList');
             this.$message({
-              message: this.$t("main.scr_modal_del_succes_info"),
-              type: "success",
+              message: this.$t('main.scr_modal_del_succes_info'),
+              type: 'success',
             });
           } else {
             this.$message.error(result.message);
@@ -142,8 +149,8 @@ export default {
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: this.$t("main.scr_modal_del_error_info"),
+            type: 'info',
+            message: this.$t('main.scr_modal_del_error_info'),
           });
         });
     },

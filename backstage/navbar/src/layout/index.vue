@@ -1,12 +1,19 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <SingleUserForm :device="device" :dialogState="singleUserFormState"></SingleUserForm>
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <SingleUserForm
+      :device="device"
+      :dialogState="singleUserFormState"
+    ></SingleUserForm>
+    <div
+      v-if="device === 'mobile' && sidebar.opened"
+      class="drawer-bg"
+      @click="handleClickOutside"
+    />
     <div v-show="showSideBar">
       <sidebar class="sidebar-container" />
 
       <div class="main-container">
-        <div :class="{'fixed-header':fixedHeader}">
+        <div :class="{ 'fixed-header': fixedHeader }">
           <navbar />
         </div>
         <app-main />
@@ -26,14 +33,14 @@ export default {
   name: "Layout",
   data() {
     return {
-      device: "desktop"
+      device: "desktop",
     };
   },
   components: {
     Navbar,
     Sidebar,
     AppMain,
-    SingleUserForm
+    SingleUserForm,
   },
   mixins: [ResizeMixin],
   computed: {
@@ -58,14 +65,27 @@ export default {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === "mobile"
+        mobile: this.device === "mobile",
       };
-    }
+    },
   },
   methods: {
     handleClickOutside() {
       this.$store.dispatch("app/closeSideBar", { withoutAnimation: false });
-    }
+    },
+    subscribeSocketMessage() {
+      this.sockets.subscribe("message", (data) => {
+        // console.log("🚀 ~ file: index.vue ~ line 78 ~ this.sockets.subscribe ~ data", data)
+        let { plugin, msg } = data;
+        if (plugin && msg) {
+          this.$notify({
+            title: "消息",
+            dangerouslyUseHTMLString: true,
+            message: msg,
+          });
+        }
+      });
+    },
   },
   mounted() {
     initEvent(this);
@@ -73,14 +93,16 @@ export default {
       this.$store.dispatch("singleUser/getUserInfo");
     }
     // 触发DoraVIP登录
-    this.$root.eventBus.$on("toggleVipLogin", message => {
+    this.$root.eventBus.$on("toggleVipLogin", (message) => {
       this.$store.dispatch("singleUser/showSingleUserForm", {
         messageInfo: message,
         formData: {},
-        regFormData: {}
+        regFormData: {},
       });
     });
-  }
+    // 添加消息订阅
+    this.subscribeSocketMessage();
+  },
 };
 </script>
 
@@ -116,6 +138,7 @@ export default {
   z-index: 9;
   width: calc(100% - #{$sideBarWidth});
   transition: width 0.28s;
+  background-color: #f5f7f9;
 }
 
 .hideSidebar .fixed-header {

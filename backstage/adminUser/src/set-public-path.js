@@ -1,1 +1,1 @@
-__webpack_public_path__ = window.getPublicPath('adminUser')
+__webpack_public_path__ = window.getPublicPath('adminUser');

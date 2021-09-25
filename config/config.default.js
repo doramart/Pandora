@@ -1,20 +1,17 @@
-'use strict'
+'use strict';
 const path = require('path');
 const fs = require('fs');
 const defaultConfig = require('./ext/config');
 
-
-module.exports = appInfo => {
-
+module.exports = (appInfo) => {
   return {
-
     keys: 'doracms2',
 
     cluster: {
       listen: {
         port: 10003,
         hostname: '',
-      }
+      },
     },
 
     session: {
@@ -22,7 +19,7 @@ module.exports = appInfo => {
       maxAge: 24 * 3600 * 1000, // 1 day
       httpOnly: true,
       encrypt: true,
-      renew: true //延长会话有效期
+      renew: true, // 延长会话有效期
     },
 
     // 前台会员登录有效时间
@@ -33,11 +30,20 @@ module.exports = appInfo => {
 
     // 设置网站图标
     siteFile: {
-      '/favicon.ico': fs.readFileSync(path.join(appInfo.baseDir, 'app/public/favicon.ico'))
+      '/favicon.ico': fs.readFileSync(
+        path.join(appInfo.baseDir, 'app/public/favicon.ico')
+      ),
     },
 
     // 配置需要的中间件,数组顺序即为中间件的加载顺序
-    middleware: ['notfoundHandler', 'crossHeader', 'compress', 'authUserToken', 'authAdminToken', 'authAdminPower'],
+    middleware: [
+      'notfoundHandler',
+      'crossHeader',
+      'compress',
+      'authUserToken',
+      'authAdminToken',
+      'authAdminPower',
+    ],
 
     // gzip压缩
     compress: {
@@ -56,7 +62,6 @@ module.exports = appInfo => {
         '.html': 'nunjucks',
       },
     },
-
 
     // 国际化
     i18n: {
@@ -78,14 +83,15 @@ module.exports = appInfo => {
     session_secret: 'doracms_secret',
     auth_cookie_name: 'doracms',
     encrypt_key: 'dora',
-    salt_aes_key: "doracms_",
-    salt_md5_key: "dora",
+    salt_aes_key: 'doracms_',
+    salt_md5_key: 'dora',
+    socket_prefix: 'dora_socket',
 
     // 安全性校验
     security: {
       csrf: {
         enable: false,
-      }
+      },
     },
 
     // api跨域
@@ -116,101 +122,128 @@ module.exports = appInfo => {
     },
 
     // 数据备份定时
-    backUpTick: '0 0 0 */1 * ?', //每天凌晨0点执行一次
+    backUpTick: '0 0 0 */1 * ?', // 每天凌晨0点执行一次
 
-
+    io: {
+      namespace: {
+        '/': {
+          connectionMiddleware: ['auth'],
+          packetMiddleware: ['filter'],
+        },
+      },
+    },
 
     backUpDataRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/backupDataManage')],
+      match: [(ctx) => ctx.path.startsWith('/manage/backupDataManage')],
     },
 
     uploadFileRouter: {
       uploadFileFormat: {
-        "upload_path": process.cwd() + '/app/public',
-        "static_root_path": 'cms' // 针对云存储可设置
+        upload_path: process.cwd() + '/app/public',
+        static_root_path: 'cms', // 针对云存储可设置
       },
-      match: [ctx => ctx.path.startsWith('/manage/uploadFile'), ctx => ctx.path.startsWith('/api/upload/files'), ctx => ctx.path.startsWith('/api/upload/ueditor'), , ctx => ctx.path.startsWith('/api/upload/filePath')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/uploadFile'),
+        (ctx) => ctx.path.startsWith('/api/upload/files'),
+        (ctx) => ctx.path.startsWith('/api/upload/ueditor'),
+        (ctx) => ctx.path.startsWith('/api/upload/filePath'),
+      ],
     },
 
     // 
-
 
     // CONFIG_NORMALPLUGIN_BEGIN
 
     // doraRegUserPluginBegin
     regUserRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/regUser'), ctx => ctx.path.startsWith('/api/user')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/regUser'),
+        (ctx) => ctx.path.startsWith('/api/user'),
+      ],
     },
     // doraRegUserPluginEnd
 
     // doraAdsPluginBegin
     adsRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/ads'), ctx => ctx.path.startsWith('/api/ads')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/ads'),
+        (ctx) => ctx.path.startsWith('/api/ads'),
+      ],
     },
     // doraAdsPluginEnd
 
     // doraAnnouncePluginBegin
     announceRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/systemAnnounce')],
+      match: [(ctx) => ctx.path.startsWith('/manage/systemAnnounce')],
     },
     // doraAnnouncePluginEnd
 
     // doraContentPluginBegin
     contentRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/content'), ctx => ctx.path.startsWith('/api/content')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/content'),
+        (ctx) => ctx.path.startsWith('/api/content'),
+      ],
     },
     // doraContentPluginEnd
 
     // doraContentCategoryPluginBegin
     contentCategoryRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/contentCategory'), ctx => ctx.path.startsWith('/api/contentCategory')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/contentCategory'),
+        (ctx) => ctx.path.startsWith('/api/contentCategory'),
+      ],
     },
     // doraContentCategoryPluginEnd
 
     // doraContentMessagePluginBegin
     contentMessageRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/contentMessage'), ctx => ctx.path.startsWith('/api/contentMessage')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/contentMessage'),
+        (ctx) => ctx.path.startsWith('/api/contentMessage'),
+      ],
     },
     // doraContentMessagePluginEnd
 
     // doraContentTagsPluginBegin
     contentTagRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/contentTag'), ctx => ctx.path.startsWith('/api/contentTag')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/contentTag'),
+        (ctx) => ctx.path.startsWith('/api/contentTag'),
+      ],
     },
     // doraContentTagsPluginEnd
 
     // doraContentTempPluginBegin
     contentTempRouter: {
-      match: ['/manage/template/getTemplateForderList',
+      match: [
+        '/manage/template/getTemplateForderList',
         '/manage/template/getTemplateFileText',
         '/manage/template/updateTemplateFileText',
         '/api/contentTemplate/getDefaultTempInfo',
-      ]
+      ],
     },
     // doraContentTempPluginEnd
 
-    // doraHelpCenterPluginBegin
-    helpCenterRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/helpCenter'), ctx => ctx.path.startsWith('/api/helpCenter')],
-    },
-    // doraHelpCenterPluginEnd
-
-
     // doraSystemNotifyPluginBegin
     systemNotifyRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/systemNotify'), ctx => ctx.path.startsWith('/api/systemNotify')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/systemNotify'),
+        (ctx) => ctx.path.startsWith('/api/systemNotify'),
+      ],
     },
     // doraSystemNotifyPluginEnd
 
     // doraSystemOptionLogPluginBegin
     systemOptionLogRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/systemOptionLog')],
+      match: [(ctx) => ctx.path.startsWith('/manage/systemOptionLog')],
     },
     // doraSystemOptionLogPluginEnd
 
     // doraTemplateConfigPluginBegin
     templateConfigRouter: {
-      match: ['/manage/template/getMyTemplateList',
+      match: [
+        '/manage/template/getMyTemplateList',
         '/manage/template/addTemplateItem',
         '/manage/template/delTemplateItem',
         '/manage/template/getTemplateItemlist',
@@ -220,35 +253,36 @@ module.exports = appInfo => {
         '/manage/template/uploadCMSTemplate',
         '/manage/template/enableTemp',
         '/manage/template/uninstallTemp',
-      ]
+      ],
     },
     // doraTemplateConfigPluginEnd
 
     // doraVersionManagePluginBegin
     versionManageRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/versionManage'), ctx => ctx.path.startsWith('/api/versionManage')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/versionManage'),
+        (ctx) => ctx.path.startsWith('/api/versionManage'),
+      ],
     },
     // doraVersionManagePluginEnd
 
     // doraMailTemplatePluginBegin
     mailTemplateRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/mailTemplate'), ctx => ctx.path.startsWith('/api/mailTemplate')],
+      match: [
+        (ctx) => ctx.path.startsWith('/manage/mailTemplate'),
+        (ctx) => ctx.path.startsWith('/api/mailTemplate'),
+      ],
     },
     // doraMailTemplatePluginEnd
 
-
     // doraMiddleStagePluginBegin
     doraMiddleStageRouter: {
-      match: [ctx => ctx.path.startsWith('/manage/singleUser')],
+      match: [(ctx) => ctx.path.startsWith('/manage/singleUser')],
     },
     // doraMiddleStagePluginEnd
 
     // CONFIG_NORMALPLUGIN_END
 
-
-
-
-    ...defaultConfig
-
-  }
-}
+    ...defaultConfig,
+  };
+};

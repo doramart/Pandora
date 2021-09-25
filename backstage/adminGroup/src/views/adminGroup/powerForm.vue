@@ -16,27 +16,30 @@
         :render-content="renderContent"
       ></el-tree>
       <span slot="footer" class="dialog-footer">
-        <el-button size="medium" @click="closeTree">{{$t("main.cancelBtnText")}}</el-button>
-        <el-button size="medium" type="primary" @click="savePower">{{$t("main.confirmBtnText")}}</el-button>
+        <el-button size="medium" @click="closeTree">{{
+          $t('main.cancelBtnText')
+        }}</el-button>
+        <el-button size="medium" type="primary" @click="savePower">{{
+          $t('main.confirmBtnText')
+        }}</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 <script>
-import { updateAdminGroup } from "@/api/adminGroup";
-import _ from "lodash";
+import { updateAdminGroup } from '@/api/adminGroup';
 
 export default {
   props: {
     roleState: Object,
-    treeData: Array
+    treeData: Array,
   },
   data() {
     return {
       defaultProps: {
-        children: "children",
-        label: "label"
-      }
+        children: 'children',
+        label: 'label',
+      },
     };
   },
   methods: {
@@ -44,20 +47,20 @@ export default {
       let currentNodes = this.$refs.tree.getCheckedNodes();
       let currentArr = [];
       currentNodes.length > 0 &&
-        currentNodes.map((item, index) => {
-          if (item.source_type == "1") {
+        currentNodes.map((item) => {
+          if (item.source_type == '1') {
             currentArr.push(item._id);
           }
         });
       let params = this.roleState.formData;
       params.power = currentArr;
-      updateAdminGroup(params).then(result => {
+      updateAdminGroup(params).then((result) => {
         if (result.status === 200) {
-          this.$store.dispatch("adminGroup/hideAdminGroupRoleForm");
-          this.$store.dispatch("adminGroup/getAdminGroupList");
+          this.$store.dispatch('adminGroup/hideAdminGroupRoleForm');
+          this.$store.dispatch('adminGroup/getAdminGroupList');
           this.$message({
-            message: this.$t("adminGroup.lb_updatePower_success"),
-            type: "success"
+            message: this.$t('adminGroup.lb_updatePower_success'),
+            type: 'success',
           });
         } else {
           this.$message.error(result.message);
@@ -65,9 +68,9 @@ export default {
       });
     },
     closeTree() {
-      this.$store.dispatch("adminGroup/hideAdminGroupRoleForm");
+      this.$store.dispatch('adminGroup/hideAdminGroupRoleForm');
     },
-    renderContent(h, { node, data, store }) {
+    renderContent(h, { node }) {
       return (
         <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
           <span>
@@ -75,11 +78,11 @@ export default {
           </span>
         </span>
       );
-    }
+    },
   },
   updated() {
     this.$refs.tree &&
       this.$refs.tree.setCheckedKeys(this.roleState.formData.power);
-  }
+  },
 };
 </script>

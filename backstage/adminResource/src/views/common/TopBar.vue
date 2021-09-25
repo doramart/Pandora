@@ -15,27 +15,26 @@ export default {
     device: String,
     pageInfo: Object,
     type: String,
-    ids: Array
+    ids: Array,
   },
   data() {
     return {
       selectUserList: [],
-      searchkey: ""
+      searchkey: '',
     };
   },
   methods: {
     addResource() {
-      this.$store.dispatch("adminResource/showAdminResourceForm", {
-        type: "root",
+      this.$store.dispatch('adminResource/showAdminResourceForm', {
+        type: 'root',
         formData: {
-          parentId: "0"
-        }
+          parentId: 0,
+        },
       });
-    }
+    },
     // TOPBARLEFTOPTION
   },
-  components: {}
+  components: {},
 };
 </script>
-<style lang="scss">
-</style>
+<style lang="scss"></style>

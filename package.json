@@ -1,6 +1,6 @@
 {
-  "name": "doracms-sql",
-  "version": "2.1.7",
+  "name": "pandora",
+  "version": "2.1.8",
   "description": "",
   "dependencies": {
     "await-stream-ready": "^1.0.1",
@@ -9,10 +9,11 @@
     "crypto-js": "^4.0.0",
     "egg": "^2.3.0",
     "egg-doras-middlestage": "^1.0.0",
-    "egg-doras-uploadfile": "^1.0.5",
+    "egg-doras-uploadfile": "^1.0.7",
     "egg-doras-validate": "^1.0.1",
     "egg-scripts": "^2.11.0",
     "egg-sequelize": "^5.2.2",
+    "egg-socket.io": "^4.1.6",
     "egg-view-nunjucks": "^2.2.0",
     "iconv-lite": "^0.5.0",
     "js-cache": "^1.0.3",
@@ -23,10 +24,6 @@
     "mariadb": "^2.4.2",
     "module-alias": "^2.2.1",
     "moment": "^2.24.0",
-    "mysql2": "^2.1.0",
-    "node-schedule": "^1.3.2",
-    "node-unzip-2": "^0.2.8",
-    "nodemailer": "6.3.0",
     "qr-image": "^3.2.0",
     "shelljs": "^0.8.3",
     "stream-wormhole": "^1.1.0",
@@ -35,14 +32,21 @@
     "xss": "^1.0.6"
   },
   "devDependencies": {
+    "@alicloud/pop-core": "^1.7.10",
     "archiver": "^3.1.1",
     "autod": "^3.0.1",
     "autod-egg": "^1.0.0",
+    "babel-eslint": "8",
     "egg-bin": "^4.13.0",
     "egg-ci": "^1.8.0",
     "egg-mock": "^3.14.0",
-    "eslint": "^4.18.0",
-    "eslint-config-egg": "^7.0.0",
+    "eslint": "4",
+    "eslint-config-egg": "7",
+    "eslint-plugin-prettier": "^3.3.1",
+    "node-schedule": "^1.3.2",
+    "node-unzip-2": "^0.2.8",
+    "nodemailer": "6.3.0",
+    "prettier": "^2.4.1",
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {
@@ -50,7 +54,7 @@
   },
   "scripts": {
     "debug": "egg-bin debug",
-    "dev": "cross-env NODE_ENV=development && egg-bin dev",
+    "dev": "cross-env NODE_ENV=development && egg-bin dev --sticky",
     "test": "npm run lint -- --fix && egg-bin pkgfiles && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
@@ -63,7 +67,7 @@
     "makeReleasePro": "node ./build/renderPro --type release",
     "makeAdminScaffoldPro": "node ./build/renderPro --type adminScaffold",
     "makeGitHubPro": "node ./build/renderPro --type github",
-    "start": "cross-env NODE_ENV=production && egg-scripts start --daemon --title=doracms-sql",
+    "start": "cross-env NODE_ENV=production && egg-scripts start --daemon --title=doracms-sql --sticky",
     "stop": "egg-scripts stop --title=doracms-sql"
   },
   "ci": {

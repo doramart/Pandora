@@ -1,22 +1,22 @@
-# Pandora CMS-SQL 
+# Pandora 2.1.8
 
 ![DoraCMS](https://ae01.alicdn.com/kf/H114ba4fd0eab4f36a4b16d970e11222dz.png "DoraCMS")
 
 
 ## Pandora CMS 视频简介
 
-[DoraCMS 视频简介](https://www.bilibili.com/video/av77251776/)  
+[Pandora CMS 视频简介](https://www.bilibili.com/video/av77251776/)  
 
 
 
 ## 说明
 
-### DoraCMS 使用的技术栈：
+### Pandora CMS 使用的技术栈：
 
 ```
 1、nodejs 12 + eggjs 2
 2、vue-cli
-3、mariadb 10 / mysql 8
+3、mariadb 10 
 ```
 
 文档： [Pandora CMS 开发文档](https://www.doracms.com)  
@@ -26,7 +26,7 @@ API： [Pandora CMS API文档](https://www.html-js.cn/static/apidoc/index.html)
 后台登录： https://sql.html-js.cn/dr-admin  
 测试账号：doracms/123456  
 
-### Pandora CMS 安装：
+### DoraCMS 安装：
 
 **创建项目需要的数据库，登录 MySQL 创建数据库**
 
@@ -46,7 +46,7 @@ show databases;
 use doracms;
 ```
 
-**导入SQL文件，生成数据库表，SQL 文件在 Pandora CMS 的 databak 目录，**
+**导入SQL文件，生成数据库表，SQL 文件在 DoraCMS 的 databak 目录，**
 
 > 目录改成，自己的 doracms.sql 文件目录
 
@@ -64,12 +64,12 @@ npm i --registry=https://registry.npm.taobao.org
 > /app/config/config.local.js
 
 ```
-// 配置mysql信息
+// 配置 mariadb 信息
 sequelize: {
-    dialect: 'mysql'，
+    dialect: 'mariadb'，
     host: '127.0.0.1'， // 本地
     port: 3306，
-    database: 'doracms'， //mysql database dir
+    database: 'doracms'， //mariadb database dir
     username: "root"，
     password: "123456"，
     delegate: 'model'

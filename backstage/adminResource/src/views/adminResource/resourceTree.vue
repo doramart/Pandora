@@ -10,18 +10,18 @@
 </template>
 
 <script>
-import { getOneAdminResource, deleteAdminResource } from "@/api/adminResource";
+import { getOneAdminResource, deleteAdminResource } from '@/api/adminResource';
 
 export default {
   props: {
-    treeData: Array
+    treeData: Array,
   },
   data() {
     return {
       defaultProps: {
-        children: "children",
-        label: "label"
-      }
+        children: 'children',
+        label: 'label',
+      },
     };
   },
 
@@ -30,24 +30,24 @@ export default {
       let formData = {};
       formData.parentId = data._id;
       formData.parent = {
-        label: data.label
+        label: data.label,
       };
-      this.$store.dispatch("adminResource/showAdminResourceForm", {
+      this.$store.dispatch('adminResource/showAdminResourceForm', {
         edit: false,
-        type: "children",
-        formData: formData
+        type: 'children',
+        formData: formData,
       });
     },
 
     edit(store, data) {
       let rowData = data;
       getOneAdminResource({ id: rowData._id })
-        .then(result => {
+        .then((result) => {
           if (result.status === 200) {
-            this.$store.dispatch("adminResource/showAdminResourceForm", {
+            this.$store.dispatch('adminResource/showAdminResourceForm', {
               edit: true,
-              type: "children",
-              formData: result.data
+              type: 'children',
+              formData: result.data,
             });
           } else {
             this.$message.error(result.message);
@@ -55,33 +55,33 @@ export default {
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: this.$t("main.scr_modal_del_error_info")
+            type: 'info',
+            message: this.$t('main.scr_modal_del_error_info'),
           });
         });
     },
 
     remove(store, data) {
       this.$confirm(
-        this.$t("main.del_notice"),
-        this.$t("main.scr_modal_title"),
+        this.$t('main.del_notice'),
+        this.$t('main.scr_modal_title'),
         {
-          confirmButtonText: this.$t("main.confirmBtnText"),
-          cancelButtonText: this.$t("main.cancelBtnText"),
-          type: "warning"
+          confirmButtonText: this.$t('main.confirmBtnText'),
+          cancelButtonText: this.$t('main.cancelBtnText'),
+          type: 'warning',
         }
       )
         .then(() => {
           return deleteAdminResource({
-            ids: data._id
+            ids: data._id,
           });
         })
-        .then(result => {
+        .then((result) => {
           if (result.status === 200) {
-            this.$store.dispatch("adminResource/getAdminResourceList");
+            this.$store.dispatch('adminResource/getAdminResourceList');
             this.$message({
-              message: this.$t("main.scr_modal_del_succes_info"),
-              type: "success"
+              message: this.$t('main.scr_modal_del_succes_info'),
+              type: 'success',
             });
           } else {
             this.$message.error(result.message);
@@ -89,8 +89,8 @@ export default {
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: this.$t("main.scr_modal_del_error_info")
+            type: 'info',
+            message: this.$t('main.scr_modal_del_error_info'),
           });
         });
     },
@@ -98,12 +98,12 @@ export default {
     moveResource(store, data) {
       let rowData = data;
       getOneAdminResource({ id: rowData._id })
-        .then(result => {
+        .then((result) => {
           if (result.status === 200) {
-            this.$store.dispatch("adminResource/showAdminSelectResourceForm", {
+            this.$store.dispatch('adminResource/showAdminSelectResourceForm', {
               edit: true,
-              type: "children",
-              formData: result.data
+              type: 'children',
+              formData: result.data,
             });
           } else {
             this.$message.error(result.message);
@@ -111,15 +111,15 @@ export default {
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: this.$t("main.scr_modal_del_error_info")
+            type: 'info',
+            message: this.$t('main.scr_modal_del_error_info'),
           });
         });
     },
 
     renderContent(h, { node, data, store }) {
       let moveBtn =
-        node.data.type == "0" && node.data.parentId != "0" ? (
+        node.data.type == '0' && node.data.parentId != 0 ? (
           <el-tooltip
             class="item"
             effect="dark"
@@ -136,10 +136,10 @@ export default {
             </el-button>
           </el-tooltip>
         ) : (
-          ""
+          ''
         );
       return (
-        <span style="flex: 1; display: flex; align-items: center; justify-content: right; font-size: 14px;">
+        <span style="flex: 1; display: flex; align-items: center; justify-content: left; font-size: 14px;">
           <span>
             <span>{node.data.comments}</span>
           </span>
@@ -157,8 +157,8 @@ export default {
           </span>
         </span>
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

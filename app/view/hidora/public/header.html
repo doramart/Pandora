@@ -5,8 +5,13 @@
   <input type="hidden" value="{{lsk}}" id="sysKeys">
   <div class="top">
     <div class="box">
-      <div class="welcome">欢迎您访问<a href="/" target="_blank">DoraCMS</a> 本站旨在为大家提供前端开发相关资讯！本站为<a href="/"
-          target="_blank">DoraCMS SQL</a>演示站，<a href="https://github.com/doramart/DoraCMS-SQL" target="_blank">源码下载</a>
+      <div class="welcome">欢迎您访问<a href="https://github.com/doramart/DoraCMS-SQL" target="_blank">DoraCMS</a> 
+        {% if logined %}
+           您好&nbsp;<a href="/users/userCenter">{{userInfo.userName}}</a>&nbsp;<a href="#" id="userLoginOut">{{__('lc_loginOut')}}</a>
+        {% else %}
+       您可以<a href="/users/login"
+          target="_blank">登录</a>&nbsp;或<a href="/users/reg" target="_blank">注册</a>
+        {% endif %}
       </div>
       <div class="guanzhu"><i></i>
         <ul class="weixin">

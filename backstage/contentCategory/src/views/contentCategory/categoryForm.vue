@@ -113,7 +113,6 @@ export default {
   props: ["dialogState", "forderlist"],
   data() {
     return {
-      server_api: settings.server_api,
       cateRules: {
         name: [
           {

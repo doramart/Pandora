@@ -19,20 +19,10 @@
             </ul>
             {% endfor %}
         </div>
-        <!-- <script>
-            var obj = null;
-            var As = document.getElementById('pageContents').getElementsByTagName('a');
-            obj = As[0];
-            for (i = 1; i < As.length; i++) {
-                if (window.location.href.indexOf(As[i].href) >= 0)
-                    obj = As[i];
-            }
-            obj.id = 'pagecurrent'
-        </script> -->
-        <div class="page-box">
+        <div class="pages-box">
             {% if posts and posts.length>0 %}
             {% set firstDocuments = posts[posts.length-1] %}
-            <h2 class="page-box-title">{{cateInfo.name}}</h2>
+            <h2 class="pages-box-title">{{cateInfo.name}}</h2>
             <div class="content">
                 {{firstDocuments.comments | safe}}
             </div>

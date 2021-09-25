@@ -1,36 +1,34 @@
-import * as types from "../types.js";
-import { contentList, getOneContent, coverList } from "@/api/content";
-import _ from "lodash";
+import * as types from '../types.js';
+import { contentList, getOneContent, coverList } from '@/api/content';
 
 const state = {
   formState: {
     edit: false,
     formData: {
-      targetUser: "",
-      title: "",
-      stitle: "",
-      type: "1",
+      targetUser: '',
+      title: '',
+      stitle: '',
+      content_type: '1',
       categories: [],
-      keywords: "",
-      sortPath: "",
+      keywords: '',
+      sortPath: '',
       tags: [],
-      keywords: "",
-      sImg: "/static/upload/images/defaultImg.jpg",
-      sImgType: "2",
-      cover: "",
-      discription: "",
+      sImg: '/static/upload/images/defaultImg.jpg',
+      sImgType: '2',
+      cover: '',
+      discription: '',
       author: {},
-      uAuthor: "",
-      markDownComments: "",
-      state: "1",
+      uAuthor: '',
+      markDownComments: '',
+      state: '1',
       isTop: 0,
-      roofPlacement: "0",
+      roofPlacement: '0',
       clickNum: 0,
-      comments: "",
-      simpleComments: "",
+      comments: '',
+      simpleComments: '',
       commentNum: 0,
       likeNum: 0,
-      dismissReason: "",
+      dismissReason: '',
     },
   },
   contentList: {
@@ -42,9 +40,9 @@ const state = {
       show: false,
       edit: false,
       formData: {
-        name: "",
-        alias: "",
-        targetUser: "",
+        name: '',
+        alias: '',
+        targetUser: '',
       },
     },
   },
@@ -53,7 +51,7 @@ const state = {
       show: false,
       edit: false,
       formData: {
-        categories: "",
+        categories: '',
       },
     },
   },
@@ -78,28 +76,27 @@ const mutations = {
     state.formState.edit = formState.edit;
     state.formState.formData = Object.assign(
       {
-        targetUser: "",
-        title: "",
-        stitle: "",
-        type: "1",
+        targetUser: '',
+        title: '',
+        stitle: '',
+        content_type: '1',
         categories: [],
-        keywords: "",
-        sortPath: "",
+        keywords: '',
+        sortPath: '',
         tags: [],
-        keywords: "",
-        sImg: "",
-        sImgType: "2",
-        cover: "",
-        discription: "",
+        sImg: '',
+        sImgType: '2',
+        cover: '',
+        discription: '',
         author: {},
-        uAuthor: "",
-        markDownComments: "",
-        state: "1",
+        uAuthor: '',
+        markDownComments: '',
+        state: '1',
         isTop: 0,
-        roofPlacement: "0",
+        roofPlacement: '0',
         clickNum: 0,
-        comments: "",
-        simpleComments: "",
+        comments: '',
+        simpleComments: '',
         commentNum: 0,
         likeNum: 0,
       },
@@ -118,9 +115,9 @@ const mutations = {
     state.directUser.formState.type = formState.type;
     state.directUser.formState.formData = Object.assign(
       {
-        name: "",
-        alias: "",
-        targetUser: "",
+        name: '',
+        alias: '',
+        targetUser: '',
       },
       formState.formData
     );
@@ -131,7 +128,7 @@ const mutations = {
     state.moveCate.formState.type = formState.type;
     state.moveCate.formState.formData = Object.assign(
       {
-        categories: "",
+        categories: '',
       },
       formState.formData
     );
@@ -199,12 +196,7 @@ const actions = {
       show: false,
     });
   },
-  showCoverListDialog: (
-    { commit },
-    params = {
-      edit: false,
-    }
-  ) => {
+  showCoverListDialog: ({ commit }) => {
     commit(types.CONTENT_COVERDIALOGSTAGE, {
       show: true,
     });
@@ -214,12 +206,7 @@ const actions = {
       show: false,
     });
   },
-  showDraftListDialog: (
-    { commit },
-    params = {
-      edit: false,
-    }
-  ) => {
+  showDraftListDialog: ({ commit }) => {
     commit(types.CONTENT_DRAFTDIALOGSTAGE, {
       show: true,
     });
@@ -248,7 +235,7 @@ const actions = {
   },
 
   getDraftContentList({ commit }, params = {}) {
-    contentList(Object.assign(params, { draft: "1" })).then((result) => {
+    contentList(Object.assign(params, { draft: '1' })).then((result) => {
       commit(types.CONTENT_DRAFTLIST, result.data);
     });
   },

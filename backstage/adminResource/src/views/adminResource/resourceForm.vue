@@ -19,14 +19,24 @@
         :label-position="device == 'mobile' ? 'top' : 'right'"
       >
         <el-form-item
-          v-show="dialogState.type==='children' && !dialogState.edit"
+          v-show="dialogState.type === 'children' && !dialogState.edit"
           :label="$t('adminResource.lb_parentType')"
           prop="label"
         >
-          <el-input size="small" :disabled="true" v-model="dialogState.formData.parent.label"></el-input>
+          <el-input
+            size="small"
+            :disabled="true"
+            v-model="dialogState.formData.parent.label"
+          ></el-input>
         </el-form-item>
-        <el-form-item :label="$t('adminResource.lb_resource_dis')" prop="comments">
-          <el-input size="small" v-model="dialogState.formData.comments"></el-input>
+        <el-form-item
+          :label="$t('adminResource.lb_resource_dis')"
+          prop="comments"
+        >
+          <el-input
+            size="small"
+            v-model="dialogState.formData.comments"
+          ></el-input>
         </el-form-item>
 
         <el-form-item :label="$t('adminResource.lb_type')" prop="type">
@@ -46,13 +56,22 @@
         </el-form-item>
         <div v-if="dialogState.formData.source_type === '0'">
           <el-form-item label="Icon" prop="componentPath">
-            <el-input size="small" v-model="dialogState.formData.icon"></el-input>
+            <el-input
+              size="small"
+              v-model="dialogState.formData.icon"
+            ></el-input>
           </el-form-item>
           <el-form-item :label="$t('adminResource.lb_router')" prop="routePath">
-            <el-input size="small" v-model="dialogState.formData.routePath"></el-input>
+            <el-input
+              size="small"
+              v-model="dialogState.formData.routePath"
+            ></el-input>
           </el-form-item>
-          <div v-if="dialogState.formData.parentId !== '0'">
-            <el-form-item :label="$t('adminResource.lb_showon_meun')" prop="enable">
+          <div v-if="dialogState.formData.parentId !== 0">
+            <el-form-item
+              :label="$t('adminResource.lb_showon_meun')"
+              prop="enable"
+            >
               <el-switch
                 :on-text="$t('main.radioOn')"
                 :off-text="$t('main.radioOff')"
@@ -62,7 +81,10 @@
           </div>
         </div>
         <div v-else>
-          <el-form-item :label="$t('adminResource.lb_resource_file_path')" prop="api">
+          <el-form-item
+            :label="$t('adminResource.lb_resource_file_path')"
+            prop="api"
+          >
             <el-input size="small" v-model="dialogState.formData.api">
               <template slot="prepend">/manage/</template>
             </el-input>
@@ -83,16 +105,23 @@
             size="medium"
             type="primary"
             @click="submitForm('ruleForm')"
-          >{{dialogState.edit ? $t('main.form_btnText_update') : $t('main.form_btnText_save')}}</el-button>
-          <el-button size="medium" @click="resetForm('ruleForm')">{{$t('main.reSetBtnText')}}</el-button>
+            >{{
+              dialogState.edit
+                ? $t('main.form_btnText_update')
+                : $t('main.form_btnText_save')
+            }}</el-button
+          >
+          <el-button size="medium" @click="resetForm('ruleForm')">{{
+            $t('main.reSetBtnText')
+          }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
   </div>
 </template>
 <script>
-import { updateAdminResource, addAdminResource } from "@/api/adminResource";
-import { checkResourceName } from "@/utils/validate";
+import { updateAdminResource, addAdminResource } from '@/api/adminResource';
+// import { checkResourceName } from "@/utils/validate";
 // const validatorUtil = require("~server/lib/utils/validatorUtil.js");
 export default {
   props: {
@@ -105,50 +134,50 @@ export default {
         source_type: [
           {
             required: true,
-            message: this.$t("validate.selectNull", {
-              label: this.$t("adminResource.lb_type"),
+            message: this.$t('validate.selectNull', {
+              label: this.$t('adminResource.lb_type'),
             }),
-            trigger: "change",
+            trigger: 'change',
           },
         ],
         comments: [
           {
             required: true,
-            message: this.$t("validate.inputNull", {
-              label: this.$t("main.comments_label"),
+            message: this.$t('validate.inputNull', {
+              label: this.$t('main.comments_label'),
             }),
-            trigger: "blur",
+            trigger: 'blur',
           },
           {
             min: 2,
             max: 30,
-            message: this.$t("validate.ranglengthandnormal", {
+            message: this.$t('validate.ranglengthandnormal', {
               min: 2,
               max: 30,
             }),
-            trigger: "blur",
+            trigger: 'blur',
           },
         ],
       },
       options: [
         {
-          value: "0",
-          label: this.$t("adminResource.lb_base_menu"),
+          value: '0',
+          label: this.$t('adminResource.lb_base_menu'),
         },
         {
-          value: "1",
-          label: this.$t("adminResource.lb_options"),
+          value: '1',
+          label: this.$t('adminResource.lb_options'),
         },
       ],
     };
   },
   methods: {
-    handleChange(value) {
-      console.log(value);
+    handleChange() {
+      // console.log(value);
     },
-    changeType(value) {},
+    changeType() {},
     confirm() {
-      this.$store.dispatch("adminResource/hideAdminResourceForm");
+      this.$store.dispatch('adminResource/hideAdminResourceForm');
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -158,11 +187,11 @@ export default {
           if (this.dialogState.edit) {
             updateAdminResource(params).then((result) => {
               if (result.status === 200) {
-                this.$store.dispatch("adminResource/hideAdminResourceForm");
-                this.$store.dispatch("adminResource/getAdminResourceList");
+                this.$store.dispatch('adminResource/hideAdminResourceForm');
+                this.$store.dispatch('adminResource/getAdminResourceList');
                 this.$message({
-                  message: this.$t("main.updateSuccess"),
-                  type: "success",
+                  message: this.$t('main.updateSuccess'),
+                  type: 'success',
                 });
               } else {
                 this.$message.error(result.message);
@@ -172,11 +201,11 @@ export default {
             // 新增
             addAdminResource(params).then((result) => {
               if (result.status === 200) {
-                this.$store.dispatch("adminResource/hideAdminResourceForm");
-                this.$store.dispatch("adminResource/getAdminResourceList");
+                this.$store.dispatch('adminResource/hideAdminResourceForm');
+                this.$store.dispatch('adminResource/getAdminResourceList');
                 this.$message({
-                  message: this.$t("main.addSuccess"),
-                  type: "success",
+                  message: this.$t('main.addSuccess'),
+                  type: 'success',
                 });
               } else {
                 this.$message.error(result.message);
@@ -184,7 +213,7 @@ export default {
             });
           }
         } else {
-          console.log("error submit!!");
+          // console.log("error submit!!");
           return false;
         }
       });

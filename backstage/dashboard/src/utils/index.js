@@ -115,7 +115,7 @@ export function renderTreeData(result) {
   let newResult = result;
   let treeData = newResult.docs;
   let childArr = _.filter(treeData, (doc) => {
-    return doc.parentId != '0'
+    return doc.parentId !== 0
   });
 
   for (let i = 0; i < childArr.length; i++) {

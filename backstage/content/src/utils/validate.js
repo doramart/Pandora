@@ -1,10 +1,10 @@
 /**
  * Created by PanJiaChen on 16/11/18.
  */
-const validator = require("validator");
+const validator = require('validator');
 
 export function isExternal(path) {
-  return /^(https?:|mailto:|tel:)/.test(path)
+  return /^(https?:|mailto:|tel:)/.test(path);
 }
 
 export function checkEmail(str) {
