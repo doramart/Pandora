@@ -79,7 +79,7 @@
                   ></vue-ueditor-wrap>
 
                   <markdown-editor
-                    v-else-if="editorState == '2'"
+                    v-else-if="editorState === '2'"
                     v-model="formState.formData.markDownComments"
                     height="800px"
                     @change="changeMdEditor"
@@ -749,8 +749,8 @@ export default {
         if (valid) {
           try {
             let params = Object.assign(
-              { content_type: this.editorState },
               this.formState.formData,
+              { content_type: this.editorState },
               this.editorState === '1'
                 ? {
                     comments: this.ueditorObj.getContent(),

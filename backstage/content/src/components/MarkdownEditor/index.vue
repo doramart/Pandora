@@ -97,6 +97,8 @@ export default {
   methods: {
     onEditorChange(value) {
       let html = this.$refs[this.id].invoke('getHtml');
+      let markdown = this.$refs[this.id].invoke('getMarkdown');
+      this.$emit('input', markdown);
       this.$emit('change', html);
     },
     uploadImg(file, callback) {
